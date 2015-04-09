@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>ORDER_full</name>
+    <name>ORDER6_full</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
     </parameters>
@@ -126,10 +125,10 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>in_ORDER</from><to>out_ORDER</to><enabled>Y</enabled> </hop>
+  <hop> <from>in_ORDER6</from><to>out_ORDER</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>in_ORDER</name>
+    <name>in_ORDER6</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -140,7 +139,7 @@
            <schema_name/>
            </partitioning>
     <connection>PVSQL</connection>
-    <sql>select&#xd;&#xa;	UPDATEDATE&#xd;&#xa;,	PROCEDR&#xd;&#xa;,	NOTES&#xd;&#xa;,	ENCOUNTER&#xd;&#xa;,	PROFILE&#xd;&#xa;,	STATUS&#xd;&#xa;,	RESULTTYPE&#xd;&#xa;,	RES_ALPHA&#xd;&#xa;,	RES_NUM&#xd;&#xa;,	TEST_DATE&#xd;&#xa;,	POST_TIME&#xd;&#xa;,	TEST_STATUS&#xd;&#xa;,	STAT&#xd;&#xa;,	REPORTABLE&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;FROM &#xd;&#xa;	&#x22;ORDER&#x22;&#xd;&#xa;WHERE&#xd;&#xa;	UPDATEDATE &#x3e; Now&#x28;&#x29; - 400</sql>
+    <sql>select&#xd;&#xa;	UPDATEDATE&#xd;&#xa;,	PROCEDR&#xd;&#xa;,	NOTES&#xd;&#xa;,	ENCOUNTER&#xd;&#xa;,	PROFILE&#xd;&#xa;,	STATUS&#xd;&#xa;,	RESULTTYPE&#xd;&#xa;,	RES_ALPHA&#xd;&#xa;,	RES_NUM&#xd;&#xa;,	TEST_DATE&#xd;&#xa;,	POST_TIME&#xd;&#xa;,	TEST_STATUS&#xd;&#xa;,	STAT&#xd;&#xa;,	REPORTABLE&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;FROM &#xd;&#xa;	&#x22;ORDER&#x22;&#xd;&#xa;-- WHERE&#xd;&#xa;--	UPDATEDATE &#x3e; Now&#x28;&#x29; - 400</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -194,7 +193,7 @@
       <add_to_result_filenames>Y</add_to_result_filenames>
       <pad>N</pad>
       <fast_dump>N</fast_dump>
-      <splitevery>5000</splitevery>
+      <splitevery>0</splitevery>
     </file>
     <fields>
     </fields>

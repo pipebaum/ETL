@@ -128,6 +128,32 @@
   <hop> <from>in_ENCOUNTER</from><to>out_ENCOUNTER</to><enabled>Y</enabled> </hop>
   </order>
   <step>
+    <name>in_ENCOUNTER</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>PVSQL</connection>
+    <sql>select &#xd;&#xa;	NUMBER&#xd;&#xa;,	PATIENT&#xd;&#xa;,	DATE&#xd;&#xa;,	TIME&#xd;&#xa;,	ENCOUNTERSCHEDULEDAT&#xd;&#xa;,	ENCOUNTERSCHEDULETIM&#xd;&#xa;,	STATUS&#xd;&#xa;,	INSURANCE&#xd;&#xa;,	DOCTOR&#xd;&#xa;,	DIAG&#xd;&#xa;,	DIAG2&#xd;&#xa;,	DIAG3&#xd;&#xa;,	DIAG4&#xd;&#xa;,	REQUESTED_DT&#xd;&#xa;,	REQUESTED_TI&#xd;&#xa;,	ORDERINGFACILITY&#xd;&#xa;,	CREATEDATE&#xd;&#xa;,	CREATETIME&#xd;&#xa;,	CREATEDBY&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;from &#xd;&#xa;	ENCOUNTR&#xd;&#xa;-- where&#xd;&#xa;--	UPDATEDATE &#x3e; Now&#x28;&#x29; - 460</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>32</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>out_ENCOUNTER</name>
     <type>TextFileOutput</type>
     <description/>
@@ -174,32 +200,6 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>160</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>in_ENCOUNTER</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>PVSQL</connection>
-    <sql>SELECT&#xd;&#xa;  EncType&#xd;&#xa;, NOTES&#xd;&#xa;, NUMBER&#xd;&#xa;, AlphaNumID&#xd;&#xa;, ParentEncNumber&#xd;&#xa;, Laboratory&#xd;&#xa;, DepartmentCode&#xd;&#xa;, BarcodeID&#xd;&#xa;, OrderingWard&#xd;&#xa;, ReportFacility&#xd;&#xa;, TestingLaboratory&#xd;&#xa;, PATIENT&#xd;&#xa;, InPatient&#xd;&#xa;, SpecialCondition&#xd;&#xa;, DATE&#xd;&#xa;, TIME&#xd;&#xa;, EncounterScheduleDat&#xd;&#xa;, EncounterScheduleTim&#xd;&#xa;, STATUS&#xd;&#xa;, Hold&#xd;&#xa;, BILL_STATUS&#xd;&#xa;, BILLImediate&#xd;&#xa;, WaiverAssigned&#xd;&#xa;, INSURANCE&#xd;&#xa;, DOCTOR&#xd;&#xa;, ExtDoctorName&#xd;&#xa;, RenderingProvider&#xd;&#xa;, DIAG&#xd;&#xa;, DIAG2&#xd;&#xa;, DIAG3&#xd;&#xa;, DIAG4&#xd;&#xa;, REQUESTED_DT&#xd;&#xa;, REQUESTED_TI&#xd;&#xa;, COPIES&#xd;&#xa;, OrderingFacility&#xd;&#xa;, OrderingLaboratory&#xd;&#xa;, STATTesting&#xd;&#xa;, HANDLING_FEE&#xd;&#xa;, SRC_REF&#xd;&#xa;, WORK_RELATED&#xd;&#xa;, AUTO_RELATED&#xd;&#xa;, INJURY_DATE&#xd;&#xa;, BILLCATEGORY&#xd;&#xa;, EXCEPTIONS&#xd;&#xa;, COLLECTOR&#xd;&#xa;, UserID&#xd;&#xa;, OrderingWorkstation&#xd;&#xa;, SendReportToPatient&#xd;&#xa;, SendReportToDoctor&#xd;&#xa;, SendReportToFacility&#xd;&#xa;, SendReportToLab&#xd;&#xa;, SendReportToWard&#xd;&#xa;, SendStatToDoctor&#xd;&#xa;, SendStatToFacility&#xd;&#xa;, SendStatToLab&#xd;&#xa;, SendStatToWard&#xd;&#xa;, CallResultsToDoctor&#xd;&#xa;, CallResultsToFacilit&#xd;&#xa;, CallResultsToLab&#xd;&#xa;, CallResultsToWard&#xd;&#xa;, BillingAuthorization&#xd;&#xa;, CaseNumber&#xd;&#xa;, STATCollection&#xd;&#xa;, STATReporting&#xd;&#xa;, PrintStatus&#xd;&#xa;, PreAssignedEncNumber&#xd;&#xa;, HomeBound&#xd;&#xa;, Fasting&#xd;&#xa;, CreateDate&#xd;&#xa;, CreateTime&#xd;&#xa;, CreatedBy&#xd;&#xa;, SignOutPathologist&#xd;&#xa;, SignOutDate&#xd;&#xa;, SlidingFeeSupported&#xd;&#xa;, VisitID&#xd;&#xa;, SlidingFeePercentage&#xd;&#xa;, PerformingDoctor&#xd;&#xa;, CollectionType&#xd;&#xa;, NoOfAttempts&#xd;&#xa;, UpdateDate&#xd;&#xa;, UpdateTime&#xd;&#xa;, OwnerID&#xd;&#xa;FROM ENCOUNTR&#xd;&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>32</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>

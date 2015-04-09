@@ -140,7 +140,7 @@
            <schema_name/>
            </partitioning>
     <connection>PVSQL</connection>
-    <sql>SELECT &#x2a;&#xd;&#xa;FROM &#x22;Order&#x22;&#xd;&#xa;</sql>
+    <sql>select&#xd;&#xa;	UPDATEDATE&#xd;&#xa;,	PROCEDR&#xd;&#xa;,	NOTES&#xd;&#xa;,	ENCOUNTER&#xd;&#xa;,	PROFILE&#xd;&#xa;,	STATUS&#xd;&#xa;,	RESULTTYPE&#xd;&#xa;,	RES_ALPHA&#xd;&#xa;,	RES_NUM&#xd;&#xa;,	TEST_DATE&#xd;&#xa;,	POST_TIME&#xd;&#xa;,	TEST_STATUS&#xd;&#xa;,	STAT&#xd;&#xa;,	REPORTABLE&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;FROM &#xd;&#xa;	&#x22;ORDER&#x22;&#xd;&#xa;WHERE&#xd;&#xa;	UPDATEDATE &#x3e; Now&#x28;&#x29; - 400</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

@@ -139,7 +139,7 @@
            <schema_name/>
            </partitioning>
     <connection>PVSQL</connection>
-    <sql>SELECT&#xd;&#xa;  CODE&#xd;&#xa;, DESCRIPTION&#xd;&#xa;, Abnormal&#xd;&#xa;, TEST&#xd;&#xa;, ResApplicableTo&#xd;&#xa;, UpdateDate&#xd;&#xa;, Updatetime&#xd;&#xa;, UserID&#xd;&#xa;, OwnerID&#xd;&#xa;FROM RESCODES&#xd;&#xa;</sql>
+    <sql>select&#xd;&#xa;	CODE&#xd;&#xa;,	DESCRIPTION&#xd;&#xa;,	ABNORMAL&#xd;&#xa;,	TEST&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;from &#xd;&#xa;	RESCODES&#xd;&#xa;-- Need cast to integer	&#xd;&#xa;-- where&#xd;&#xa;--	UPDATEDATE &#x3e; Now&#x28;&#x29; - 460 &#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

@@ -139,7 +139,7 @@
            <schema_name/>
            </partitioning>
     <connection>PVSQL</connection>
-    <sql>SELECT&#xd;&#xa;  PROCEDR&#xd;&#xa;, NOTES&#xd;&#xa;, TYPE&#xd;&#xa;, ENCOUNTER&#xd;&#xa;, STATUS&#xd;&#xa;, PROCESS_SEQ&#xd;&#xa;, STAT&#xd;&#xa;, DATE&#xd;&#xa;, TIME&#xd;&#xa;, T_CODE&#xd;&#xa;, CREATED_BY&#xd;&#xa;, UserID&#xd;&#xa;, DiagnosisCode&#xd;&#xa;, Specimen&#xd;&#xa;, ReflexedFor&#xd;&#xa;, Price&#xd;&#xa;, UseSpecifiedPrice&#xd;&#xa;, UpdateDate&#xd;&#xa;, UpdateTime&#xd;&#xa;, OwnerId&#xd;&#xa;FROM ENCORDR&#xd;&#xa;</sql>
+    <sql>select&#xd;&#xa;	PROCEDR&#xd;&#xa;,	ENCOUNTER&#xd;&#xa;,	STATUS&#xd;&#xa;,	STAT&#xd;&#xa;,	CREATED_BY&#xd;&#xa;,	SPECIMEN&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;from &#xd;&#xa;	ENCORDR&#xd;&#xa;-- need to figure out a cast to integer here&#xd;&#xa;-- where&#xd;&#xa;--	UPDATEDATE &#x3e; Now&#x28;&#x29; - 460 </sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

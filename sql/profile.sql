@@ -1,0 +1,10 @@
+select
+	ID
+,	PROCEDR
+,	PRINT_SEQ
+,	UPDATEDATE
+,	UPDATETIME
+from 
+	PROFILE
+where
+	UPDATEDATE > Now() - 460 

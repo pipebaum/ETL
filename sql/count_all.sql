@@ -1,4 +1,4 @@
-SELECT 'DOCTORS', count(*)from DOCTORS
+SELECT 'DOCTORS', count(*)from DOCTORS WHERE UPDATEDATE > Now() - 460
 union
 SELECT 'ENCORDR', count(*)from ENCORDR
 union
@@ -8,7 +8,7 @@ SELECT 'FACILITY', count(*)from FACILITY
 union
 SELECT  'INSURANC', count(*)from PATIENT
 union
-SELECT 'ORDER', count(*)from "ORDER"
+SELECT 'ORDER', count(*)from "ORDER" WHERE UPDATEDATE > Now() - 460
 union
 SELECT  'PATIENT', count(*)from PATIENT
 union

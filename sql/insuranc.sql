@@ -1,0 +1,9 @@
+select
+	NAME
+,	CODE
+,	UPDATEDATE
+,	UPDATETIME
+from 
+	INSURANC
+where
+	UPDATEDATE > Now() - 460 

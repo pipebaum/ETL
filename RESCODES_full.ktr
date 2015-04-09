@@ -178,7 +178,7 @@
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>file</name>
+      <name>D&#x3a;&#x5c;Pentaho&#x5c;ETL&#x5c;output&#x5c;RESCODE</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>

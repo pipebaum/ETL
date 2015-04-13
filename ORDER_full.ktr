@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>ORDER6_full</name>
+    <name>ORDER_full</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
     </parameters>
@@ -152,10 +153,10 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>in_ORDER6</from><to>order</to><enabled>Y</enabled> </hop>
+  <hop> <from>in_ORDER</from><to>orders</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>in_ORDER6</name>
+    <name>in_ORDER</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -181,7 +182,7 @@
     </step>
 
   <step>
-    <name>order</name>
+    <name>orders</name>
     <type>MySQLBulkLoader</type>
     <description/>
     <distribute>Y</distribute>

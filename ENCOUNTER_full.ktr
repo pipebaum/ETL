@@ -73,6 +73,33 @@
   <notepads>
   </notepads>
   <connection>
+    <name>mysql-local</name>
+    <server>localhost</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>horizon_duplicate</database>
+    <port>3306</port>
+    <username>root</username>
+    <password>Encrypted 2be98afc86aa7f2acfa1ea673ccc2a9ce</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
     <name>PVSQL</name>
     <server/>
     <type>GENERIC</type>
@@ -86,7 +113,7 @@
     <index_tablespace/>
     <attributes>
       <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>com.pervasive.jdbc.v2.Driver</attribute></attribute>
-      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;pervasive&#x3a;&#x2f;&#x2f;192.168.0.137&#x3a;1583&#x2f;HORIZON</attribute></attribute>
+      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;pervasive&#x3a;&#x2f;&#x2f;192.168.0.53&#x3a;1583&#x2f;HORIZON</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
@@ -125,8 +152,144 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>in_ENCOUNTER</from><to>out_ENCOUNTER</to><enabled>Y</enabled> </hop>
+  <hop> <from>in_ENCOUNTER</from><to>encounter</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>encounter</name>
+    <type>MySQLBulkLoader</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>mysql-local</connection>
+    <schema>horizon_duplicate</schema>
+    <table>encounter</table>
+    <encoding/>
+    <delimiter>&#x3b;</delimiter>
+    <enclosure>&#x22;</enclosure>
+    <escape_char>&#x5c;</escape_char>
+    <replace>N</replace>
+    <ignore>N</ignore>
+    <local>Y</local>
+    <fifo_file_name>&#x2f;tmp&#x2f;encounter.fifo</fifo_file_name>
+    <bulk_size>100000</bulk_size>
+      <mapping>
+        <stream_name>NUMBER</stream_name>
+        <field_name>NUMBER</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>PATIENT</stream_name>
+        <field_name>PATIENT</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>DATE</stream_name>
+        <field_name>DATE</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>TIME</stream_name>
+        <field_name>TIME</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>EncounterScheduleDat</stream_name>
+        <field_name>EncounterScheduleDat</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>EncounterScheduleTim</stream_name>
+        <field_name>EncounterScheduleTim</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>STATUS</stream_name>
+        <field_name>STATUS</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>INSURANCE</stream_name>
+        <field_name>INSURANCE</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>DOCTOR</stream_name>
+        <field_name>DOCTOR</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>DIAG</stream_name>
+        <field_name>DIAG</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>DIAG2</stream_name>
+        <field_name>DIAG2</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>DIAG3</stream_name>
+        <field_name>DIAG3</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>DIAG4</stream_name>
+        <field_name>DIAG4</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>REQUESTED_DT</stream_name>
+        <field_name>REQUESTED_DT</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>REQUESTED_TI</stream_name>
+        <field_name>REQUESTED_TI</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>OrderingFacility</stream_name>
+        <field_name>OrderingFacility</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>CreateDate</stream_name>
+        <field_name>CreateDate</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>CreateTime</stream_name>
+        <field_name>CreateTime</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>CreatedBy</stream_name>
+        <field_name>CreatedBy</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>UpdateDate</stream_name>
+        <field_name>UpdateDate</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>UpdateTime</stream_name>
+        <field_name>UpdateTime</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>160</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step>
     <name>in_ENCOUNTER</name>
     <type>TableInput</type>
@@ -148,58 +311,6 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>32</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>out_ENCOUNTER</name>
-    <type>TextFileOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <separator>&#x3b;</separator>
-    <enclosure>&#x22;</enclosure>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
-    <footer>N</footer>
-    <format>UNIX</format>
-    <compression>None</compression>
-    <encoding/>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;output&#x2f;ENCOUNTER</name>
-      <is_command>N</is_command>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>txt</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>Y</add_date>
-      <add_time>Y</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery>0</splitevery>
-    </file>
-    <fields>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>160</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>

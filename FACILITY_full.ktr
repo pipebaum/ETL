@@ -74,6 +74,33 @@
   <notepads>
   </notepads>
   <connection>
+    <name>mysql-local</name>
+    <server>localhost</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>horizon_duplicate</database>
+    <port>3306</port>
+    <username>root</username>
+    <password>Encrypted 2be98afc86aa7f2acfa1ea673ccc2a9ce</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
     <name>PVSQL</name>
     <server/>
     <type>GENERIC</type>
@@ -87,7 +114,7 @@
     <index_tablespace/>
     <attributes>
       <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>com.pervasive.jdbc.v2.Driver</attribute></attribute>
-      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;pervasive&#x3a;&#x2f;&#x2f;192.168.0.137&#x3a;1583&#x2f;HORIZON</attribute></attribute>
+      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;pervasive&#x3a;&#x2f;&#x2f;192.168.0.53&#x3a;1583&#x2f;HORIZON</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
@@ -126,7 +153,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>In-Facility</from><to>out-facility</to><enabled>Y</enabled> </hop>
+  <hop> <from>In-Facility</from><to>out_facility</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>In-Facility</name>
@@ -148,15 +175,15 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>160</xloc>
-      <yloc>96</yloc>
+      <xloc>64</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>out-facility</name>
-    <type>TextFileOutput</type>
+    <name>out_facility</name>
+    <type>MySQLBulkLoader</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -165,43 +192,77 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <separator>&#x3b;</separator>
-    <enclosure>&#x22;</enclosure>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
+    <connection>mysql-local</connection>
+    <schema>horizon_duplicate</schema>
+    <table>facility</table>
     <encoding/>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;output&#x2f;facility</name>
-      <is_command>N</is_command>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>txt</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>Y</add_date>
-      <add_time>Y</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery>0</splitevery>
-    </file>
-    <fields>
-    </fields>
+    <delimiter>&#x3b;</delimiter>
+    <enclosure>&#x22;</enclosure>
+    <escape_char>&#x5c;</escape_char>
+    <replace>N</replace>
+    <ignore>N</ignore>
+    <local>Y</local>
+    <fifo_file_name>&#x2f;tmp&#x2f;facility.fifo</fifo_file_name>
+    <bulk_size/>
+      <mapping>
+        <stream_name>ID</stream_name>
+        <field_name>ID</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>NAME</stream_name>
+        <field_name>NAME</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>ADDRESS</stream_name>
+        <field_name>ADDRESS</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>CITY</stream_name>
+        <field_name>CITY</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>STATE</stream_name>
+        <field_name>STATE</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>ZIP</stream_name>
+        <field_name>ZIP</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>PhoneNum</stream_name>
+        <field_name>PhoneNum</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>SendResultsFaxNbr</stream_name>
+        <field_name>SendResultsFaxNbr</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>SalesRepresentative</stream_name>
+        <field_name>SalesRepresentative</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>UpdateDate</stream_name>
+        <field_name>UpdateDate</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>UpdateTime</stream_name>
+        <field_name>UpdateTime</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>288</xloc>
-      <yloc>96</yloc>
+      <xloc>192</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

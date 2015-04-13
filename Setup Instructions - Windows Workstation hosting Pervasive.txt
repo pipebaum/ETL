@@ -1,0 +1,35 @@
+Some of these instructions are not strictly required, but I am doing them since I am
+using this machine as both a Pervasive server, and as the way that I open TeamViewer
+to get remote access.
+
+Setup Instructions - Pentaho Workstation
+1) Download Pentaho
+2) Unzip to any location
+3) Rename DataIntegration folder to the complete version name. e.g. pdi-ce-5.3.0.0-213
+4) Gather any jar files needed for DB drivers and place in pdi-ce-##/lib
+	- Pervasive: jpscs.jar, pvjdbc2.jar, pvjdbc2x.jar, pvjdbc2.dll
+	- MySql: mysql-connector-java-5.1.17.jar
+5) Run spoon.bat
+6) Establish connectivity by opening and running TestConnection.ktr transaction
+
+
+GitHub
+1) Download GitHub for Windows
+2) Install
+3) Login to GitHub using your user account on GitHub
+4) Clone the ETL repository to a local directory:
+	I have used the same Pentaho directory as base e.g. /pentaho/ETL
+
+Notepad++
+1) Download and Install Notepad++
+
+MySql Workbench (not required)
+1) Download MySql Workbench
+2) Make sure you have the Microsoft C++ Redistributable bpack
+3) Run MySql Workbench program.
+4) Create a connection to the MySql server
+
+Filezilla
+1) Just using this to move files over to the Ubuntu workstation/server
+
+

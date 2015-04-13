@@ -1,0 +1,2 @@
+D&#x3a;&#x5c;Pentaho&#x5c;ETL&#x5c;output&#x5c;
+&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;output&#x2f;

@@ -166,7 +166,7 @@
            <schema_name/>
            </partitioning>
     <connection>PVSQL</connection>
-    <sql>select&#xd;&#xa;	STATUS&#xd;&#xa;,	ALPHA&#xd;&#xa;,	DESCR&#xd;&#xa;,	TYPE&#xd;&#xa;,	UNITS&#xd;&#xa;,	TURN_AROUND&#xd;&#xa;,	SPECIMEN&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;from &#xd;&#xa;	PROCEDUR&#xd;&#xa;-- where&#xd;&#xa;--	UPDATEDATE &#x3e; Now&#x28;&#x29; - 460 </sql>
+    <sql>select&#xd;&#xa;	STATUS&#xd;&#xa;,	ALPHA&#xd;&#xa;,	DESCR&#xd;&#xa;,	TYPE&#xd;&#xa;,	UNITS&#xd;&#xa;,	TURN_AROUND&#xd;&#xa;,	SPECIMEN&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;from &#xd;&#xa;	PROCEDUR&#xa;where&#xa;	STATUS &#x3d; 1&#xd;&#xa;-- where&#xd;&#xa;--	UPDATEDATE &#x3e; Now&#x28;&#x29; - 460 </sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

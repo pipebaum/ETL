@@ -166,7 +166,7 @@
            <schema_name/>
            </partitioning>
     <connection>PVSQL</connection>
-    <sql>select&#xd;&#xa;	NAME&#xd;&#xa;,	CODE&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;from &#xd;&#xa;	INSURANC&#xd;&#xa;-- where&#xd;&#xa;--	UPDATEDATE &#x3e; Now&#x28;&#x29; - 460 </sql>
+    <sql>select&#xd;&#xa;	NAME&#xd;&#xa;,	CODE&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;from &#xd;&#xa;	INSURANC&#xd;&#xa;where&#xd;&#xa;	length&#x28;code&#x29; &#x3e; 0</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

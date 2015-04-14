@@ -44,3 +44,4 @@ Temporary Items
 output/
 sql/create_indexes.sql.bak
 *.architect~
+*.gz

@@ -1,0 +1,11 @@
+SET FOREIGN_KEY_CHECKS=0;
+drop table doctors;
+drop table encordr;
+drop table encountr;
+drop table facility;
+drop table insuranc;
+drop table orders;
+drop table patient;
+drop table procedur;
+drop table profile;
+drop table rescodes;

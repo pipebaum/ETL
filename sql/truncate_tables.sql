@@ -1,0 +1,12 @@
+SET FOREIGN_KEY_CHECKS=0;
+truncate table doctors;
+truncate table encordr;
+truncate table encountr;
+truncate table facility;
+truncate table insuranc;
+truncate table orders;
+truncate table patient;
+truncate table procedur;
+truncate table profile;
+truncate table rescodes;
+SET FOREIGN_KEY_CHECKS=1;

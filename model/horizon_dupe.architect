@@ -4,9 +4,18 @@
  <print-settings numCopies="1" zoom="1.0" pageNumbersPrinted="true" orientation="1" paperWidth="612.0" paperHeight="792.0" leftBorder="50.0" rightBorder="50.0" topBorder="50.0" bottomBorder="50.0" />
  <project-data-sources>
   <data-source id="DS0">
-   <property key="Logical" value="PlayPen Database" />
+   <property key="Logical" value="mysql_horizon_dupe" />
+   <property key="Connection Type" value="MySQL" />
+   <property key="JDBC URL" value="jdbc:mysql://192.168.0.112:3306/horizon_duplicate" />
+   <property key="UID" value="scottr" />
+   <property key="PWD" value="H1ghcr0ft" />
+   <property key="ca.sqlpower.architect.etl.kettle.database" value="" />
+   <property key="ca.sqlpower.architect.etl.kettle.port" value="" />
+   <property key="ca.sqlpower.architect.etl.kettle.hostname" value="" />
+   <property key="ca.sqlpower.architect.etl.kettle.repos.login" value="" />
+   <property key="ca.sqlpower.architect.etl.kettle.repos.password" value="" />
   </data-source>
-  <data-source id="DS2">
+  <data-source id="DS0">
    <property key="Connection Type" value="MySQL" />
    <property key="Logical" value="mysql_horizon_dupe" />
    <property key="JDBC URL" value="jdbc:mysql://192.168.0.112:3306/horizon_duplicate" />
@@ -20,7 +29,7 @@
   </data-source>
  </project-data-sources>
  <source-databases>
-  <database id="DB0" populated="true" UUID="63b4a138-13bf-4f5f-a5b3-ddf7c4f34c2e" dbcs-ref="DS2" name="mysql_horizon_dupe" physicalName="mysql_horizon_dupe" >
+  <database id="DB0" populated="true" UUID="63b4a138-13bf-4f5f-a5b3-ddf7c4f34c2e" dbcs-ref="DS0" name="mysql_horizon_dupe" physicalName="mysql_horizon_dupe" >
    <catalog id="CAT1" populated="false" UUID="377e5988-8ecf-4e4b-86ab-efd238423695" name="information_schema" nativeTerm="database" physicalName="information_schema" >
    </catalog>
    <catalog id="CAT2" populated="true" UUID="ba61fa93-3fb5-4f7d-89ea-b2a490837188" name="horizon_duplicate" nativeTerm="database" physicalName="horizon_duplicate" >
@@ -5367,7 +5376,7 @@
    </relationship>
   </relationships>
  </target-database>
- <ddl-generator type="ca.sqlpower.architect.ddl.GenericDDLGenerator" allow-connection="true"> </ddl-generator>
+ <ddl-generator type="ca.sqlpower.architect.ddl.MySqlDDLGenerator" allow-connection="false"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
  <play-pen zoom="1.0" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">

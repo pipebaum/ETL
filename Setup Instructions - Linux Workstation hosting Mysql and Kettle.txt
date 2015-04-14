@@ -1,0 +1,68 @@
+Linux Server Setup
+1) Install OpenSSH
+	sudo apt-get install openssh
+	- remove root access over openSSH
+	cd /etc/ssh
+	ls
+	sudo cp sshd_config sshd_config.factory-defaults
+	sudo chmod a-w /etc/ssh/sshd_config.factory-defaults
+	sudo vi /etc/ssh/sshd_config
+	 change: PermitRootLogin yes to PermitRootLogin no
+
+2) Install x11vnc 
+		sudo apt-get install x11vnc
+		sudo x11vnc -storepasswd /etc/x11vnc.pass
+		sudo chmod 600 x11vnc.pass
+		create a file in /etc/init
+		sudo vi /etc/init/x11vnc.conf
+		put the following in there:
+start on login-session-start
+script
+x11vnc -xkb -noxrecord -noxfixes -noxdamage -repeat -display :0 -auth /var/run/lightdm/root/:0 -forever -shared -bg -o /var/log/x11vnc.log -rfbauth /etc/x11vnc.pass -rfbport 5900 -allow 192.168.0.53
+end script
+	
+		Run it this time, with: 
+		sudo service x11vnc start 	
+		
+		From now on should always be running
+		
+		Also change the screen saver, seems to lockup and cause some strange behavior
+		sudo apt-get purge light-locker
+		sudo apt-get install xscreensaver
+
+3) Download and install mysql server
+		sudo apt-get install mysql-server-5.6
+		
+		Move the location of the databases to a new location
+		sudo stop mysql
+		sudo cp -rap /var/lib/mysql /etl/mysql
+		sudo chown -R mysql:mysql /etl/mysql
+		sudo cp /etc/mysql/my.cnf /etc/mysql/my.cnf.orig
+		sudo vi /etc/mysql/my.cnf
+		 change 
+		 datadir         = /etl/mysql
+		sudo cp /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/usr.sbin.mysqld.backup
+		sudo vi /etc/apparmor.d/usr.sbin.mysqld
+		 change
+		 /var/lib/mysql to /etl/mysql in two places
+		sudo /etc/init.d/apparmor restart
+
+		sudo start mysql
+		
+		mysql -uroot -p to confirm that you can login.
+		
+		
+4) Get GIT
+		sudo apt-get install git
+		
+5) Install Oracle JDK, I used JDK 8 and it worked well.
+		sudo apt-add-repository ppa:webupd8team/java
+		sudo apt-get update
+		sudo apt-get install oracle-java8-installer		
+
+6) Install Pentaho in local directory
+		mkdir ~/pdi
+		copy and unzip pentaho zip file into pdi directory rename data-integration to current version of pdi.
+		e.g. /pdi/pdi-ce-5.3.0.0-213
+		go to the directory and run spoon.sh to confirm that it works
+		

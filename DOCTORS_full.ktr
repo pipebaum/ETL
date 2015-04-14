@@ -140,7 +140,7 @@
     <index_tablespace/>
     <attributes>
       <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>com.pervasive.jdbc.v2.Driver</attribute></attribute>
-      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;pervasive&#x3a;&#x2f;&#x2f;192.168.0.137&#x3a;1583&#x2f;HORIZON</attribute></attribute>
+      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;pervasive&#x3a;&#x2f;&#x2f;192.168.0.53&#x3a;1583&#x2f;HORIZON</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
@@ -263,37 +263,6 @@
   <hop> <from>in_DOCTORS</from><to>out_doctors</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>out_doctors</name>
-    <type>MySQLBulkLoader</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>mysql-local</connection>
-    <schema>horizon_duplicate</schema>
-    <table>doctors</table>
-    <encoding/>
-    <delimiter>&#x3b;	</delimiter>
-    <enclosure>&#x22;</enclosure>
-    <escape_char>&#x5c;</escape_char>
-    <replace>N</replace>
-    <ignore>N</ignore>
-    <local>Y</local>
-    <fifo_file_name>&#x2f;tmp&#x2f;doctors.fifo</fifo_file_name>
-    <bulk_size/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>192</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>in_DOCTORS</name>
     <type>TableInput</type>
     <description/>
@@ -314,6 +283,92 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>64</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>out_doctors</name>
+    <type>MySQLBulkLoader</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>mysql-local</connection>
+    <schema>horizon_duplicate</schema>
+    <table>doctors</table>
+    <encoding/>
+    <delimiter>&#x3b;</delimiter>
+    <enclosure>&#x22;</enclosure>
+    <escape_char>&#x5c;</escape_char>
+    <replace>N</replace>
+    <ignore>N</ignore>
+    <local>Y</local>
+    <fifo_file_name>&#x2f;tmp&#x2f;doctors.fifo</fifo_file_name>
+    <bulk_size/>
+      <mapping>
+        <stream_name>ID</stream_name>
+        <field_name>ID</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>NAME</stream_name>
+        <field_name>NAME</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>CLIN_ABBR</stream_name>
+        <field_name>CLIN_ABBR</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>STREET</stream_name>
+        <field_name>STREET</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>CITY</stream_name>
+        <field_name>CITY</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>STATE</stream_name>
+        <field_name>STATE</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>ZIP</stream_name>
+        <field_name>ZIP</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>PhoneNum</stream_name>
+        <field_name>PhoneNum</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>FAX</stream_name>
+        <field_name>FAX</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>UpdateDate</stream_name>
+        <field_name>UpdateDate</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>UpdateTime</stream_name>
+        <field_name>UpdateTime</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>192</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>

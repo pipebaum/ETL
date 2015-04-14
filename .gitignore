@@ -46,3 +46,4 @@ sql/create_indexes.sql.bak
 *.architect~
 *.gz
 *.bak
+pl

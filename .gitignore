@@ -47,3 +47,4 @@ sql/create_indexes.sql.bak
 *.gz
 *.bak
 pl
+*.backup

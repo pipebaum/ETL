@@ -6,6 +6,7 @@
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
     </parameters>
@@ -128,7 +129,41 @@
   <order>
   <hop> <from>in_PROFILE</from><to>hdlDate</to><enabled>Y</enabled> </hop>
   <hop> <from>hdlDate</from><to>out_profile</to><enabled>Y</enabled> </hop>
+  <hop> <from>trunc</from><to>in_PROFILE</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>hdlDate</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>1</jsScript_type>
+        <jsScript_name>init</jsScript_name>
+        <jsScript_script>var baseDate &#x3d; new Date&#x28;&#x27;12&#x2f;28&#x2f;1800&#x27;&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
+      </jsScript>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>OnRow</jsScript_name>
+        <jsScript_script>var updatedate &#x3d; dateAdd&#x28;baseDate,&#x27;d&#x27;, updateint&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>updatedate</name>
+        <rename>updatedate</rename>
+        <type>Date</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>224</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step>
     <name>in_PROFILE</name>
     <type>TableInput</type>
@@ -149,7 +184,7 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>32</xloc>
+      <xloc>128</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>
@@ -205,15 +240,15 @@
       </mapping>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>288</xloc>
+      <xloc>320</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>hdlDate</name>
-    <type>ScriptValueMod</type>
+    <name>trunc</name>
+    <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -222,23 +257,22 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>1</jsScript_type>
-        <jsScript_name>init</jsScript_name>
-        <jsScript_script>var baseDate &#x3d; new Date&#x28;&#x27;12&#x2f;28&#x2f;1800&#x27;&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
-      </jsScript>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>OnRow</jsScript_name>
-        <jsScript_script>var updatedate &#x3d; dateAdd&#x28;baseDate,&#x27;d&#x27;, updateint&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>updatedate</name>
-        <rename>updatedate</rename>
-        <type>Date</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
+    <connection>mysql-local</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>truncate profile&#x3b;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>160</xloc>
+      <xloc>32</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>

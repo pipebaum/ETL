@@ -127,9 +127,9 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>in_ENCORDR6</from><to>hdlDate</to><enabled>Y</enabled> </hop>
+  <hop> <from>in_ENCORDR</from><to>hdlDate</to><enabled>Y</enabled> </hop>
   <hop> <from>hdlDate</from><to>out_encordr</to><enabled>Y</enabled> </hop>
-  <hop> <from>trunc</from><to>in_ENCORDR6</to><enabled>Y</enabled> </hop>
+  <hop> <from>trunc</from><to>in_ENCORDR</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>hdlDate</name>
@@ -165,7 +165,7 @@
     </step>
 
   <step>
-    <name>in_ENCORDR6</name>
+    <name>in_ENCORDR</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>

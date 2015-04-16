@@ -247,7 +247,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;FACILITY_full.ktr</filename>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;FACILITY_full.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -280,7 +280,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;DOCTORS_full.ktr</filename>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;DOCTORS_full.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -313,7 +313,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;PATIENT_full.ktr</filename>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;PATIENT_full.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -346,7 +346,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;INSURANC_full.ktr</filename>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;INSURANC_full.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -379,7 +379,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;PROCEDUR_full.ktr</filename>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;PROCEDUR_full.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -412,7 +412,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;PROFILE_full.ktr</filename>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;PROFILE_full.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -445,7 +445,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;RESCODES_full.ktr</filename>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;RESCODES_full.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -478,7 +478,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;ENCOUNTR_full.ktr</filename>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;ENCOUNTR_full.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -511,7 +511,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;ENCORDR_full.ktr</filename>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;ENCORDR_full.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -544,7 +544,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;ORDER_full.ktr</filename>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;ORDER_full.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>

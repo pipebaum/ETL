@@ -179,7 +179,7 @@
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;output&#x2f;patient</name>
+      <name>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;output&#x2f;patient</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>

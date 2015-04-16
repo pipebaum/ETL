@@ -142,7 +142,7 @@
            <schema_name/>
            </partitioning>
     <connection>mysql-local</connection>
-    <schema>horizon_duplicate</schema>
+    <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
     <table>encountr</table>
     <encoding/>
     <delimiter>&#x3b;</delimiter>
@@ -306,9 +306,9 @@
     <connection>mysql-local</connection>
     <execute_each_row>N</execute_each_row>
     <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
+    <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
-    <sql>truncate encountr&#x3b;</sql>
+    <sql>truncate &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.encountr&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>

@@ -2,6 +2,10 @@ Some of these instructions are not strictly required, but I am doing them since 
 using this machine as both a Pervasive server, and as the way that I open TeamViewer
 to get remote access.
 
+If you plan on having a version of Pentaho running here (not strictly required)
+1) Get Oracle JDK and install
+2) Note: Oracle JDK will change the path to have the latest java version as the first item on the path that will play havoc with Pervasive.SQL Control Center, so you need to change Java to be after Pervasive in the path statements
+
 Setup Instructions - Pentaho Workstation
 1) Download Pentaho
 2) Unzip to any location
@@ -20,8 +24,12 @@ GitHub
 4) Clone the ETL repository to a local directory:
 	I have used the same Pentaho directory as base e.g. /pentaho/ETL
 
-Notepad++
+Miscellaneous Programs
 1) Download and Install Notepad++
+2) Download and Install Filezilla for FTP
+
+
+C:\ProgramData\Oracle\Java\javapath;C:\PVSW\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\
 
 MySql Workbench (not required)
 1) Download MySql Workbench

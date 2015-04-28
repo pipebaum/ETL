@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>SMP_BULK_LOAD</name>
+  <name>EXPORT_2_AWS</name>
     <description/>
     <extended_description/>
     <job_version/>
+    <job_status>0</job_status>
   <directory>&#x2f;</directory>
   <created_user>-</created_user>
-  <created_date>2015&#x2f;04&#x2f;16 16&#x3a;19&#x3a;11.851</created_date>
+  <created_date>2015&#x2f;04&#x2f;28 12&#x3a;43&#x3a;59.788</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;04&#x2f;16 16&#x3a;19&#x3a;11.851</modified_date>
+  <modified_date>2015&#x2f;04&#x2f;28 12&#x3a;43&#x3a;59.788</modified_date>
     <parameters>
     </parameters>
   <connection>
@@ -103,16 +104,62 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>32</xloc>
-      <yloc>32</yloc>
+      <xloc>64</xloc>
+      <yloc>64</yloc>
       </entry>
     <entry>
-      <name>CheckTables</name>
+      <name>SQL_DUMP</name>
+      <description/>
+      <type>SHELL</type>
+      <filename>sql_dump_all.sh</filename>
+      <work_directory>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;script</work_directory>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script/>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>192</xloc>
+      <yloc>64</yloc>
+      </entry>
+    <entry>
+      <name>Transfer_2_AWS</name>
+      <description/>
+      <type>SHELL</type>
+      <filename>transfer_2_aws.sh</filename>
+      <work_directory>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;script</work_directory>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>N</insertScript>
+      <script/>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>320</xloc>
+      <yloc>64</yloc>
+      </entry>
+    <entry>
+      <name>LOAD_EXPORT</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;CHECK_TAB.ktr</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;LOAD_EXPORT.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -136,78 +183,14 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>160</xloc>
-      <yloc>32</yloc>
-      </entry>
-    <entry>
-      <name>MasterLoad</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;MasterLoad.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <force_separate_logging>N</force_separate_logging>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>288</xloc>
-      <yloc>32</yloc>
-      </entry>
-    <entry>
-      <name>Export2AWS</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;EXPORT_2_AWS.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <force_separate_logging>N</force_separate_logging>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>416</xloc>
-      <yloc>32</yloc>
+      <xloc>448</xloc>
+      <yloc>64</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
-      <to>CheckTables</to>
+      <to>SQL_DUMP</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -215,8 +198,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>CheckTables</from>
-      <to>MasterLoad</to>
+      <from>SQL_DUMP</from>
+      <to>Transfer_2_AWS</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -224,8 +207,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>MasterLoad</from>
-      <to>Export2AWS</to>
+      <from>Transfer_2_AWS</from>
+      <to>LOAD_EXPORT</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

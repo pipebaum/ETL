@@ -4,8 +4,7 @@ CREATE TABLE rescodes (
                 Abnormal VARCHAR(2),
                 TEST VARCHAR(6),
                 UpdateDate DATE,
-                Updatetime TIME,
-                PRIMARY KEY (CODE)
+                Updatetime TIME
 );
 
 
@@ -14,8 +13,7 @@ CREATE TABLE profile (
                 PROCEDR VARCHAR(6) NOT NULL,
                 PRINT_SEQ INT,
                 UpdateDate DATE,
-                UpdateTime TIME,
-                PRIMARY KEY (ID, PROCEDR)
+                UpdateTime TIME
 );
 
 
@@ -28,8 +26,7 @@ CREATE TABLE procedur (
                 TURN_AROUND VARCHAR(10),
                 SPECIMEN VARCHAR(10),
                 UpdateDate DATE NOT NULL,
-                UpdateTime TIME NOT NULL,
-                PRIMARY KEY (ALPHA)
+                UpdateTime TIME NOT NULL
 );
 
 
@@ -65,8 +62,7 @@ CREATE TABLE patient (
                 SSN VARCHAR(20),
                 HeadofFamily INT,
                 UpdateDate DATE NOT NULL,
-                UpdateTime TIME NOT NULL,
-                PRIMARY KEY (ID)
+                UpdateTime TIME NOT NULL
 );
 
 
@@ -74,8 +70,7 @@ CREATE TABLE insuranc (
                 CODE VARCHAR(5) NOT NULL,
                 NAME VARCHAR(120),
                 UpdateDate DATE NOT NULL,
-                UpdateTime TIME NOT NULL,
-                PRIMARY KEY (CODE)
+                UpdateTime TIME NOT NULL
 );
 
 
@@ -90,8 +85,7 @@ CREATE TABLE facility (
                 SendResultsFaxNbr VARCHAR(20),
                 SalesRepresentative INT,
                 UpdateDate TIME NOT NULL,
-                UpdateTime DATE NOT NULL,
-                PRIMARY KEY (ID)
+                UpdateTime DATE NOT NULL
 );
 
 
@@ -106,8 +100,7 @@ CREATE TABLE doctors (
                 PhoneNum VARCHAR(20),
                 FAX VARCHAR(20),
                 UpdateDate DATE NOT NULL,
-                UpdateTime TIME NOT NULL,
-                PRIMARY KEY (ID)
+                UpdateTime TIME NOT NULL
 );
 
 
@@ -132,8 +125,7 @@ CREATE TABLE encountr (
                 CreateTime INT,
                 CreatedBy CHAR(1),
                 UpdateDate DATE,
-                UpdateTime TIME,
-                PRIMARY KEY (NUMBER)
+                UpdateTime TIME
 );
 
 
@@ -152,8 +144,7 @@ CREATE TABLE orders (
                 STAT INT,
                 Reportable INT,
                 UpdateDate DATE,
-                UpdateTime TIME,
-                PRIMARY KEY (RES_ALPHA, RES_NUM)
+                UpdateTime TIME
 );
 
 
@@ -165,6 +156,5 @@ CREATE TABLE encordr (
                 STAT INT,
                 Specimen VARCHAR(2),
                 UpdateDate DATE,
-                UpdateTime TIME,
-                PRIMARY KEY (PROCEDR, ENCOUNTER, CREATED_BY)
+                UpdateTime TIME
 );

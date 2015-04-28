@@ -1,0 +1,3 @@
+useServerPrepStmts=false
+rewriteBatchedStatements=true
+useCompression=true

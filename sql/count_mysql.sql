@@ -1,3 +1,4 @@
+use smpetl;
 SELECT 'DOCTORS', count(*)from doctors
 union
 SELECT 'ENCORDR', count(*)from encordr

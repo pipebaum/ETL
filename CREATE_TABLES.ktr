@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>ORDER_full</name>
+    <name>CREATE_TABLES</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -67,9 +67,9 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2015&#x2f;04&#x2f;06 15&#x3a;33&#x3a;28.022</created_date>
+  <created_date>2015&#x2f;04&#x2f;16 16&#x3a;21&#x3a;57.137</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;04&#x2f;06 15&#x3a;33&#x3a;28.022</modified_date>
+  <modified_date>2015&#x2f;04&#x2f;16 16&#x3a;21&#x3a;57.137</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -127,143 +127,9 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>in_ORDER</from><to>orders</to><enabled>Y</enabled> </hop>
-  <hop> <from>trunc</from><to>in_ORDER</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>in_ORDER</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>PVSQL</connection>
-    <sql>select&#xd;&#xa;	PROCEDR&#xd;&#xa;,	NOTES&#xd;&#xa;,	ENCOUNTER&#xd;&#xa;,	PROFILE&#xd;&#xa;,	STATUS&#xd;&#xa;,	RESULTTYPE&#xd;&#xa;,	RES_ALPHA&#xd;&#xa;,	RES_NUM&#xd;&#xa;,	TEST_DATE&#xd;&#xa;,	POST_TIME&#xd;&#xa;,	TEST_STATUS&#xd;&#xa;,	STAT&#xd;&#xa;,	REPORTABLE&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;FROM &#xd;&#xa;	&#x22;ORDER&#x22;&#xd;&#xa;WHERE&#xa;	UPDATEDATE &#x3e;&#x3d; &#x27;2011-01-01&#x27;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>128</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>orders</name>
-    <type>MySQLBulkLoader</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>mysql-local</connection>
-    <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
-    <table>orders</table>
-    <encoding/>
-    <delimiter>&#x3b;</delimiter>
-    <enclosure>&#x22;</enclosure>
-    <escape_char>&#x5c;</escape_char>
-    <replace>N</replace>
-    <ignore>N</ignore>
-    <local>Y</local>
-    <fifo_file_name>&#x2f;tmp&#x2f;orders.fifo</fifo_file_name>
-    <bulk_size>100000</bulk_size>
-      <mapping>
-        <stream_name>PROCEDR</stream_name>
-        <field_name>PROCEDR</field_name>
-        <field_format_ok>OK</field_format_ok>
-      </mapping>
-      <mapping>
-        <stream_name>NOTES</stream_name>
-        <field_name>NOTES</field_name>
-        <field_format_ok>OK</field_format_ok>
-      </mapping>
-      <mapping>
-        <stream_name>ENCOUNTER</stream_name>
-        <field_name>ENCOUNTER</field_name>
-        <field_format_ok>OK</field_format_ok>
-      </mapping>
-      <mapping>
-        <stream_name>PROFILE</stream_name>
-        <field_name>PROFILE</field_name>
-        <field_format_ok>OK</field_format_ok>
-      </mapping>
-      <mapping>
-        <stream_name>STATUS</stream_name>
-        <field_name>STATUS</field_name>
-        <field_format_ok>OK</field_format_ok>
-      </mapping>
-      <mapping>
-        <stream_name>RESULTTYPE</stream_name>
-        <field_name>RESULTTYPE</field_name>
-        <field_format_ok>OK</field_format_ok>
-      </mapping>
-      <mapping>
-        <stream_name>RES_ALPHA</stream_name>
-        <field_name>RES_ALPHA</field_name>
-        <field_format_ok>OK</field_format_ok>
-      </mapping>
-      <mapping>
-        <stream_name>RES_NUM</stream_name>
-        <field_name>RES_NUM</field_name>
-        <field_format_ok>OK</field_format_ok>
-      </mapping>
-      <mapping>
-        <stream_name>TEST_DATE</stream_name>
-        <field_name>TEST_DATE</field_name>
-        <field_format_ok>OK</field_format_ok>
-      </mapping>
-      <mapping>
-        <stream_name>POST_TIME</stream_name>
-        <field_name>POST_TIME</field_name>
-        <field_format_ok>OK</field_format_ok>
-      </mapping>
-      <mapping>
-        <stream_name>TEST_STATUS</stream_name>
-        <field_name>TEST_STATUS</field_name>
-        <field_format_ok>OK</field_format_ok>
-      </mapping>
-      <mapping>
-        <stream_name>STAT</stream_name>
-        <field_name>STAT</field_name>
-        <field_format_ok>OK</field_format_ok>
-      </mapping>
-      <mapping>
-        <stream_name>Reportable</stream_name>
-        <field_name>Reportable</field_name>
-        <field_format_ok>OK</field_format_ok>
-      </mapping>
-      <mapping>
-        <stream_name>UpdateDate</stream_name>
-        <field_name>UpdateDate</field_name>
-        <field_format_ok>OK</field_format_ok>
-      </mapping>
-      <mapping>
-        <stream_name>UpdateTime</stream_name>
-        <field_name>UpdateTime</field_name>
-        <field_format_ok>OK</field_format_ok>
-      </mapping>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>224</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>trunc</name>
+    <name>CreateTable</name>
     <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
@@ -278,7 +144,7 @@
     <single_statement>N</single_statement>
     <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
-    <sql>truncate &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.orders&#x3b;</sql>
+    <sql>&#x2f;&#x2a;&#xa;CREATE TABLE &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.orders &#x28;&#xa;                RES_ALPHA VARCHAR&#x28;20&#x29; NOT NULL,&#xa;                RES_NUM DECIMAL&#x28;52&#x29; NOT NULL,&#xa;                PROCEDR VARCHAR&#x28;6&#x29;,&#xa;                NOTES TEXT,&#xa;                ENCOUNTER INT,&#xa;                PROFILE VARCHAR&#x28;6&#x29;,&#xa;                STATUS CHAR&#x28;1&#x29;,&#xa;                RESULTTYPE CHAR&#x28;1&#x29;,&#xa;                TEST_DATE DATETIME,&#xa;                POST_TIME DATETIME,&#xa;                TEST_STATUS CHAR&#x28;1&#x29;,&#xa;                STAT INT,&#xa;                Reportable INT,&#xa;                UpdateDate DATE,&#xa;                UpdateTime TIME&#xa;&#x29;&#x3b;&#xa;&#xa;CREATE TABLE &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.patient &#x28;&#xa;                ID INT NOT NULL,&#xa;                HISPatientID VARCHAR&#x28;20&#x29;,&#xa;                Status CHAR&#x28;1&#x29;,&#xa;                LNAME VARCHAR&#x28;40&#x29;,&#xa;                FNAME VARCHAR&#x28;40&#x29;,&#xa;                MNAME VARCHAR&#x28;40&#x29;,&#xa;                STREET VARCHAR&#x28;120&#x29;,&#xa;                Street1 VARCHAR&#x28;120&#x29;,&#xa;                Street2 VARCHAR&#x28;120&#x29;,&#xa;                CITY VARCHAR&#x28;40&#x29;,&#xa;                STATE VARCHAR&#x28;40&#x29;,&#xa;                ZIP VARCHAR&#x28;20&#x29;,&#xa;                DOB DATETIME,&#xa;                SEX VARCHAR&#x28;2&#x29;,&#xa;                Race VARCHAR&#x28;6&#x29;,&#xa;                PhoneNum VARCHAR&#x28;20&#x29;,&#xa;                S_FNAME VARCHAR&#x28;15&#x29;,&#xa;                S_LNAME VARCHAR&#x28;15&#x29;,&#xa;                SS_FNAME VARCHAR&#x28;15&#x29;,&#xa;                SS_LNAME VARCHAR&#x28;15&#x29;,&#xa;                RELATION VARCHAR&#x28;2&#x29;,&#xa;                S_RELATION VARCHAR&#x28;2&#x29;,&#xa;                PRIM_INS VARCHAR&#x28;5&#x29;,&#xa;                PRIM_INS_NUM VARCHAR&#x28;20&#x29;,&#xa;                PRI_INS_GRP VARCHAR&#x28;20&#x29;,&#xa;                SEC_INS VARCHAR&#x28;5&#x29;,&#xa;                SEC_INS_NUM VARCHAR&#x28;20&#x29;,&#xa;                SEC_INS_GRP VARCHAR&#x28;20&#x29;,&#xa;                SSN VARCHAR&#x28;20&#x29;,&#xa;                HeadofFamily INT,&#xa;                UpdateDate DATE NOT NULL,&#xa;                UpdateTime TIME NOT NULL&#xa;&#x29;&#x3b;&#xa;&#xa;&#xa;&#x2a;&#x2f;&#xa;&#xa;CREATE TABLE &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.rescodes &#x28;&#xd;&#xa;                CODE VARCHAR&#x28;6&#x29; NOT NULL,&#xd;&#xa;                DESCRIPTION TEXT,&#xd;&#xa;                Abnormal VARCHAR&#x28;2&#x29;,&#xd;&#xa;                TEST VARCHAR&#x28;6&#x29;,&#xd;&#xa;                UpdateDate DATE,&#xd;&#xa;                Updatetime TIME&#xd;&#xa;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;CREATE TABLE &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.profile &#x28;&#xd;&#xa;                ID VARCHAR&#x28;6&#x29; NOT NULL,&#xd;&#xa;                PROCEDR VARCHAR&#x28;6&#x29; NOT NULL,&#xd;&#xa;                PRINT_SEQ INT,&#xd;&#xa;                UpdateDate DATE,&#xd;&#xa;                UpdateTime TIME&#xd;&#xa;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;CREATE TABLE &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.procedur &#x28;&#xd;&#xa;                ALPHA VARCHAR&#x28;6&#x29; NOT NULL,&#xd;&#xa;                STATUS INT,&#xd;&#xa;                DESCR VARCHAR&#x28;120&#x29;,&#xd;&#xa;                TYPE CHAR&#x28;1&#x29;,&#xd;&#xa;                UNITS VARCHAR&#x28;10&#x29;,&#xd;&#xa;                TURN_AROUND VARCHAR&#x28;10&#x29;,&#xd;&#xa;                SPECIMEN VARCHAR&#x28;10&#x29;,&#xd;&#xa;                UpdateDate DATE NOT NULL,&#xd;&#xa;                UpdateTime TIME NOT NULL&#xd;&#xa;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;CREATE TABLE &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.insuranc &#x28;&#xd;&#xa;                CODE VARCHAR&#x28;5&#x29; NOT NULL,&#xd;&#xa;                NAME VARCHAR&#x28;120&#x29;,&#xd;&#xa;                UpdateDate DATE NOT NULL,&#xd;&#xa;                UpdateTime TIME NOT NULL&#xd;&#xa;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;CREATE TABLE &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.facility &#x28;&#xd;&#xa;                ID VARCHAR&#x28;10&#x29; NOT NULL,&#xd;&#xa;                NAME VARCHAR&#x28;120&#x29;,&#xd;&#xa;                ADDRESS VARCHAR&#x28;120&#x29;,&#xd;&#xa;                CITY VARCHAR&#x28;40&#x29;,&#xd;&#xa;                STATE VARCHAR&#x28;20&#x29;,&#xd;&#xa;                ZIP VARCHAR&#x28;20&#x29;,&#xd;&#xa;                PhoneNum VARCHAR&#x28;20&#x29;,&#xd;&#xa;                SendResultsFaxNbr VARCHAR&#x28;20&#x29;,&#xd;&#xa;                SalesRepresentative INT,&#xd;&#xa;                UpdateDate TIME NOT NULL,&#xd;&#xa;                UpdateTime DATE NOT NULL&#xd;&#xa;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;CREATE TABLE &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.doctors &#x28;&#xd;&#xa;                ID VARCHAR&#x28;10&#x29; NOT NULL,&#xd;&#xa;                NAME VARCHAR&#x28;120&#x29;,&#xd;&#xa;                CLIN_ABBR VARCHAR&#x28;10&#x29;,&#xd;&#xa;                STREET VARCHAR&#x28;120&#x29;,&#xd;&#xa;                CITY VARCHAR&#x28;40&#x29;,&#xd;&#xa;                STATE VARCHAR&#x28;20&#x29;,&#xd;&#xa;                ZIP VARCHAR&#x28;20&#x29;,&#xd;&#xa;                PhoneNum VARCHAR&#x28;20&#x29;,&#xd;&#xa;                FAX VARCHAR&#x28;20&#x29;,&#xd;&#xa;                UpdateDate DATE NOT NULL,&#xd;&#xa;                UpdateTime TIME NOT NULL&#xd;&#xa;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;CREATE TABLE &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.encountr &#x28;&#xd;&#xa;                NUMBER INT NOT NULL,&#xd;&#xa;                PATIENT INT,&#xd;&#xa;                DATE DATETIME,&#xd;&#xa;                TIME DATETIME,&#xd;&#xa;                EncounterScheduleDat DATETIME,&#xd;&#xa;                EncounterScheduleTim DATETIME,&#xd;&#xa;                STATUS INT,&#xd;&#xa;                INSURANCE VARCHAR&#x28;5&#x29;,&#xd;&#xa;                DOCTOR VARCHAR&#x28;10&#x29;,&#xd;&#xa;                DIAG VARCHAR&#x28;10&#x29;,&#xd;&#xa;                DIAG2 VARCHAR&#x28;10&#x29;,&#xd;&#xa;                DIAG3 VARCHAR&#x28;10&#x29;,&#xd;&#xa;                DIAG4 VARCHAR&#x28;10&#x29;,&#xd;&#xa;                REQUESTED_DT DATETIME,&#xd;&#xa;                REQUESTED_TI DATETIME,&#xd;&#xa;                OrderingFacility VARCHAR&#x28;10&#x29;,&#xd;&#xa;                CreateDate DATETIME,&#xd;&#xa;                CreateTime INT,&#xd;&#xa;                CreatedBy CHAR&#x28;1&#x29;,&#xd;&#xa;                UpdateDate DATE,&#xd;&#xa;                UpdateTime TIME&#xd;&#xa;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;CREATE TABLE &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.encordr &#x28;&#xd;&#xa;                PROCEDR VARCHAR&#x28;6&#x29; NOT NULL,&#xd;&#xa;                ENCOUNTER INT NOT NULL,&#xd;&#xa;                CREATED_BY CHAR&#x28;1&#x29; NOT NULL,&#xd;&#xa;                STATUS CHAR&#x28;1&#x29;,&#xd;&#xa;                STAT INT,&#xd;&#xa;                Specimen VARCHAR&#x28;2&#x29;,&#xd;&#xa;                UpdateDate DATE,&#xd;&#xa;                UpdateTime TIME&#xd;&#xa;&#x29;&#x3b;&#xd;&#xa;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -288,7 +154,7 @@
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>32</xloc>
+      <xloc>64</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>

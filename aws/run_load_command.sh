@@ -1,6 +1,4 @@
-# $1 = user
-# $2 = password
-# $3 = database
+# $1 = database
 
 function getDate(){
    _now=$(date +"%m_%d_%Y_%H_%M_%S")
@@ -23,10 +21,10 @@ else
    exit 1
 fi
 
-zcat alldates.dump.gz | mysql -u $1 -p$2 -D$3 -B
+zcat alldates.dump.gz | mysql --login-path=local -D$1 -B
 echo "$(getDate) alldates loaded"
 
-zcat datelimit.dump.gz | mysql -u $1 -p$2 -D$3 -B
+zcat datelimit.dump.gz | mysql --login-path=local -D$1 -B
 echo "$(getDate) datelimit loaded"
 
 _file_out="backup_$(getDate).gz"

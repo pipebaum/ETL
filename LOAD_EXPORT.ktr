@@ -166,7 +166,7 @@
            <schema_name/>
            </partitioning>
     <dynamicCommandField>N</dynamicCommandField>
-    <command>&#x2f;bin&#x2f;bash &#x7e;&#x2f;run_load_command.sh &#x24;&#x7b;SMP_DB_PASSWORD&#x7d;&#x3b;</command>
+    <command>&#x2f;bin&#x2f;bash &#x7e;&#x2f;run_load_command.sh &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;&#x3b;</command>
     <commandfieldname/>
     <port>22</port>
     <servername>&#x24;&#x7b;SMP_SERVER_IP&#x7d;</servername>

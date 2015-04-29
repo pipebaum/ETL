@@ -111,8 +111,8 @@
       <name>SQL_DUMP</name>
       <description/>
       <type>SHELL</type>
-      <filename>sql_dump_all.sh</filename>
-      <work_directory>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;script</work_directory>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;scripts&#x2f;sql_dump_all.sh</filename>
+      <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
       <set_logfile>N</set_logfile>
@@ -124,9 +124,8 @@
       <insertScript>N</insertScript>
       <script/>
       <loglevel>Basic</loglevel>
-      <argument0>&#x24;&#x7b;SMP_DB_USER&#x7d;</argument0>
-      <argument1>&#x24;&#x7b;SMP_DB_PASSWORD&#x7d;</argument1>
-      <argument2>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</argument2>
+      <argument0>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</argument0>
+      <argument1>&#x24;&#x7b;SMP_ETL_HOME&#x7d;</argument1>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -137,8 +136,8 @@
       <name>Transfer_2_AWS</name>
       <description/>
       <type>SHELL</type>
-      <filename>transfer_2_aws.sh</filename>
-      <work_directory>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;script</work_directory>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;scripts&#x2f;transfer_2_aws.sh</filename>
+      <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
       <set_logfile>N</set_logfile>

@@ -1,5 +1,0 @@
-mysql -uscottr -p smpetl < datelimit.dump
-mysql -uscottr -p smpetl < alldates.dump
-
-zcat gunzip alldates.dump.gz | mysql -uroot -p -Dsmpetl -B
-time zcat gunzip full.dump.gz | mysql -uroot -p -Dsmpetl -B

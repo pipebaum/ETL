@@ -124,6 +124,9 @@
       <insertScript>N</insertScript>
       <script/>
       <loglevel>Basic</loglevel>
+      <argument0>&#x24;&#x7b;SMP_DB_USER&#x7d;</argument0>
+      <argument1>&#x24;&#x7b;SMP_DB_PASSWORD&#x7d;</argument1>
+      <argument2>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</argument2>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>

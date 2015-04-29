@@ -48,3 +48,4 @@ sql/create_indexes.sql.bak
 *.bak
 pl
 *.backup
+dump/

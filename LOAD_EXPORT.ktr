@@ -169,12 +169,12 @@
     <command>&#x2f;bin&#x2f;bash &#x7e;&#x2f;run_load_command.sh &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;&#x3b;</command>
     <commandfieldname/>
     <port>22</port>
-    <servername>&#x24;&#x7b;SMP_SERVER_IP&#x7d;</servername>
-    <userName>&#x24;&#x7b;SMP_SERVER_USER&#x7d;</userName>
+    <servername>&#x24;&#x7b;SMP_AWS_HOST_IP&#x7d;</servername>
+    <userName>&#x24;&#x7b;SMP_AWS_HOST_USER&#x7d;</userName>
     <password>Encrypted </password>
     <usePrivateKey>Y</usePrivateKey>
     <keyFileName>&#x24;&#x7b;SMP_AWS_PEM_FILE&#x7d;</keyFileName>
-    <passPhrase>&#x24;&#x7b;SMP_SERVER_PASSPHRASE&#x7d;</passPhrase>
+    <passPhrase>&#x24;&#x7b;SMP_AWS_HOST_PASSPHRASE&#x7d;</passPhrase>
     <stdOutFieldName>stdOut</stdOutFieldName>
     <stdErrFieldName>stdErr</stdErrFieldName>
     <timeOut>0</timeOut>

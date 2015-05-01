@@ -20,7 +20,7 @@
     <database>smpetl</database>
     <port>3306</port>
     <username>root</username>
-    <password>Encrypted 2be98afc86aa7f2e4ba2d97578dc0fb8b</password>
+    <password>Encrypted 2be98afc86aa7f2acfa1ea673ccc2a9ce</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>

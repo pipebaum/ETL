@@ -1,4 +1,4 @@
-# move the dump file
+# move the dump file from local to the remote AWS server
 scp -i ~/pdi/SMPLABS_AWSKeyPair.pem ~/pdi/etl/ETL/dump/*.gz 54.69.142.168:~
 echo "moved db files"
 

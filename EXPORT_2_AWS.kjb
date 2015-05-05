@@ -150,6 +150,7 @@
       <script/>
       <loglevel>Basic</loglevel>
       <argument0>&#x24;&#x7b;SMP_AWS_PEM_FILE&#x7d;</argument0>
+      <argument1>&#x24;&#x7b;SMP_ETL_HOME&#x7d;</argument1>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>

@@ -51,7 +51,6 @@ end script
 		
 		mysql -uroot -p to confirm that you can login.
 		
-		
 4) Get GIT
 		sudo apt-get install git
 		
@@ -67,18 +66,58 @@ end script
 		go to the directory and run spoon.sh to confirm that it works
 
 7) Create Pentaho user account
-		useradd
+		useradd pentaho
 		sudo adduser pentaho sudo #adds to sudoer group
-		# setup ssh
+		sudo cp -r /home/root/.ssh ~/.
+		sudo chown pentaho:pentaho .ssh
 		
-8) Clone project into appropriate working directory
-		cd /etl/prod
-		git clone ""
-		chmod pentaho:pentaho /etl/prod/ETL
-		
-9) Setup kettle.properties
+8) Setup kettle.properties
 		mkdir ~/.kettle/
 		cp /etl/prod/ETL/kettle.properties ~/.kettle/.
 		vi ~/.kettle/kettle.properties
 		search for any variables that start with SMP_ and change appropriately
+		At this time the configuration properties are:
+			SMP_AWS_HOST_IP=54.69.142.168
+			SMP_AWS_HOST_PASSPHRASE=simplelabs
+			SMP_AWS_HOST_USER=scottr
+			SMP_AWS_PEM_FILE=/pdi/SMPLABS_AWSKeyPair.pem
+			SMP_DB_USER=root
+			SMP_ETL_HOME=/pdi/etl
+			SMP_ETL_SCHEMA=smpetl
+			
+		One standard Kettle property will also need to be updated.
+			KETTLE_SHARED_OBJECTS=/pdi/etl/dev_conn.xml  
+		where $ETL_HOME = /pdi/etl (adjust for your location as done in step 10 Git clone step)
+		
+
+9) Add .pem file to the location specified in 
+		We need a .pem file in order to access our AWS instance. 
+		All of the Kettle scripts that reference the .pem file use the SMP_AWS_PEM_FILE location specified in 
+		step 7. You need to make sure that the file exists at this location.
+		I recommend you use a fully qualified path and not a relative path e.g. 
+		
+		/home/pentaho/.kettle/something.pem 
+		is better than
+		~/.kettle/something.pem 
+
+10) Clone project into appropriate working directory
+		cd /etl/prod
+		git clone ""
+		chmod pentaho:pentaho /etl/prod/ETL
+		
+10) The scripts use MySql local-path configurations to connect to MySQL
+		info here: http://dev.mysql.com/doc/refman/5.6/en/mysql-config-editor.html
+		MySQL has a utility that will allow you to build the required connections which are stored
+		for any user that is calling the scripts.
+		To simplify things, simply run the $ETL_HOME/scripts/create_config.sh and provide the appropriate
+		password.
+		NOTE: For bulk load we are using the root user, since all access is local. 
+		You may want to change to use a different user. If you do you will need to modify the database config files
+		and the mysql-config-editor settings
+		
+11) Adjust the Kettle dev_conn.xml file.
+		Kettle uses shared connections to access the databases when running scripts.
+		This file is located in $ETL_HOME/dev_conn.xml (as adjusted in step 8)
+		You will need to change the connection properties in this file to point to the appropriate location.
+		
 		

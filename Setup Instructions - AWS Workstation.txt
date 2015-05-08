@@ -1,0 +1,34 @@
+AWS Server Setup
+The assumption is that you have gone through the basic start of an AWS instance
+
+1) Download and install mysql server
+		sudo apt-get install mysql-server-5.6
+		
+		Move the location of the databases to a new location
+		
+		mysql -uroot -p to confirm that you can login.
+		
+
+2) Create Pentaho user account
+		sudo useradd -m -d /home/pentaho -s /bin/bash -c "pentaho service account" -U pentaho
+		sudo passwd pentaho
+		sudo adduser pentaho sudo    'add user to sudoer group
+		sudo cp -r /home/root/.ssh ~/.
+		sudo chown pentaho:pentaho .ssh
+		login as the pentaho user
+		su pentaho
+		whoami   'to test that you are now logged in as pentaho
+		
+3) The scripts use MySql local-path configurations to connect to MySQL
+		info here: http://dev.mysql.com/doc/refman/5.6/en/mysql-config-editor.html
+		MySQL has a utility that will allow you to build the required connections which are stored
+		for any user that is calling the scripts.
+		To simplify things, simply run the $ETL_HOME/scripts/create_config.sh and provide the appropriate
+		password.
+		NOTE: For bulk load we are using the root user, since all access is local. 
+		You may want to change to use a different user. If you do you will need to modify the database config files
+		and the mysql-config-editor settings
+		
+		
+		
+

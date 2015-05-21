@@ -51,7 +51,6 @@ end script
 		
 		mysql -uroot -p to confirm that you can login.
 		
-		
 4) Get GIT
 		sudo apt-get install git
 		
@@ -67,18 +66,75 @@ end script
 		go to the directory and run spoon.sh to confirm that it works
 
 7) Create Pentaho user account
-		useradd
-		sudo adduser pentaho sudo #adds to sudoer group
-		# setup ssh
+		sudo useradd -m -d /home/pentaho -s /bin/bash -c "pentaho service account" -U pentaho
+		sudo passwd pentaho
+		sudo adduser pentaho sudo    'add user to sudoer group
+		sudo cp -r /home/root/.ssh ~/.
+		sudo chown pentaho:pentaho .ssh
+		login as the pentaho user
 		
 8) Clone project into appropriate working directory
 		cd /etl/prod
-		git clone ""
+		git clone "https://github.com/pipebaum/ETL.git"
 		chmod pentaho:pentaho /etl/prod/ETL
 		
+		references to $ETL_HOME mean use /etl/prod/ETL
+		
+8b) Login as pentaho user for additional work
+		su pentaho
+		whoami   'to test that you are now logged in as pentaho
+
 9) Setup kettle.properties
+
+		cd ~
 		mkdir ~/.kettle/
 		cp /etl/prod/ETL/kettle.properties ~/.kettle/.
 		vi ~/.kettle/kettle.properties
 		search for any variables that start with SMP_ and change appropriately
+		If no kettle.properties exists, create the file and add the following.
 		
+		At this time the configuration properties are:
+			SMP_AWS_HOST_IP=54.69.142.168
+			SMP_AWS_HOST_PASSPHRASE=simplelabs
+			SMP_AWS_HOST_USER=scottr
+			SMP_AWS_PEM_FILE=/pdi/SMPLABS_AWSKeyPair.pem
+			SMP_DB_USER=root
+			SMP_ETL_HOME=/pdi/etl
+			SMP_ETL_SCHEMA=smpetl
+			
+		One standard Kettle property will also need to be updated.
+			KETTLE_SHARED_OBJECTS={$ETL_HOME}/dev_conn.xml  
+		replace $ETL_HOME with the actual path and get rid of the brackets
+		
+
+9) Add .pem file to the location specified in  
+		We need a .pem file in order to access our AWS instance. 
+		All of the Kettle scripts that reference the .pem file use the SMP_AWS_PEM_FILE location specified in 
+		step 7. You need to make sure that the file exists at this location.
+		I recommend you use a fully qualified path and not a relative path e.g. 
+		
+		/home/pentaho/.kettle/something.pem 
+		is better than
+		~/.kettle/something.pem 
+	
+10) The scripts use MySql local-path configurations to connect to MySQL
+		info here: http://dev.mysql.com/doc/refman/5.6/en/mysql-config-editor.html
+		MySQL has a utility that will allow you to build the required connections which are stored
+		for any user that is calling the scripts.
+		To simplify things, simply run the $ETL_HOME/scripts/create_config.sh and provide the appropriate
+		password.
+		NOTE: For bulk load we are using the root user, since all access is local. 
+		You may want to change to use a different user. If you do you will need to modify the database config files
+		and the mysql-config-editor settings
+		
+11) Adjust the Kettle dev_conn.xml file.
+		Kettle uses shared connections to access the databases when running scripts.
+		This file is located in $ETL_HOME/dev_conn.xml (as adjusted in step 8)
+		You will need to change the connection properties in this file to point to the appropriate location.
+		
+12) Validate that you have connectivity to the AWS Server
+		ssh -i ~/SMPLABS_AWSKeyPair.pem 54.69.142.168
+		You need to configure AWS to accept the pentaho user over SSH. 
+		See Setup Instructions - AWS for instructions on how to do that.
+		
+

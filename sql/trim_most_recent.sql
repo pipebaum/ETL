@@ -14,7 +14,7 @@ and updatedate >= '2015-04-08';
 delete from facility
 where updatedate > '2015-03-15';
 
-delete from INSURANC 
+delete from insuranc 
 where updatetime > '14:45:00'
 and updatedate >= '2013-09-23';
 

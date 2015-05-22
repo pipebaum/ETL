@@ -4,12 +4,12 @@ select 'doctor', 12, count(*)
 from doctors
 where updatedate > '2015-03-15'
 union all
-select 'encordr', -1 , count(*)
+select 'encordr', 93 , count(*)
 from encordr
 where updatetime > '15:44:32'
 and updatedate >= '2015-04-08'
 union all
-select 'encountr', -1 , count(*)
+select 'encountr', 36 , count(*)
 from encountr
 where updatetime > '15:44:32'
 and updatedate >= '2015-04-08'

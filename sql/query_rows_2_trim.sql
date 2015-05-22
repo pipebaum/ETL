@@ -1,6 +1,6 @@
 use smpetl;
 
-select 'doctor', 12, count(*)
+select 'doctor', 11, count(*)
 from doctors
 where updatedate > '2015-03-15'
 union all
@@ -35,16 +35,14 @@ and updatedate > '2015-04-07'
 union all
 select 'procedur', 5, count(*)
 from procedur
-where updatedate > '2015-04-07'
+where updatedate > '2015-04-02'
 union all
 select 'profile', 4, count(*)
 from profile
 where updatedate > '2015-03-15'
 union all
-select 'rescodes', 69, count(*)
+select 'rescodes', 9, count(*)
 from rescodes
 where updatedate > '2014-08-12';
 
-
-
-select updatedate, updatetime from facility order by 1 desc, 2 desc;
+select updatedate, updatetime from procedur order by 1 desc, 2 desc;

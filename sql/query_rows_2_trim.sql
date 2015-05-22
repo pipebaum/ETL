@@ -45,4 +45,4 @@ select 'rescodes', 9, count(*)
 from rescodes
 where updatedate > '2014-08-12';
 
-select updatedate, updatetime from procedur order by 1 desc, 2 desc;
+-- select updatedate, updatetime from procedur order by 1 desc, 2 desc;

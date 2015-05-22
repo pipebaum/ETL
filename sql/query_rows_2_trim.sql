@@ -33,7 +33,7 @@ from patient
 where updatetime > '17:00:00'
 and updatedate > '2015-04-07'
 union all
-select 'procedur', 0, count(*)
+select 'procedur', 5, count(*)
 from procedur
 where updatedate > '2015-04-07'
 union all

@@ -19,7 +19,8 @@ where updatetime > '14:45:00'
 and updatedate >= '2013-09-23';
 
 delete from orders
-where updatedate > '2015-03-15';
+where updatetime > '19:40:00'
+and updatedate > '2015-04-07';
 
 delete from patient 
 where updatedate > '2015-04-07'

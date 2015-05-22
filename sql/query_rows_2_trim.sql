@@ -46,3 +46,5 @@ from rescodes
 where updatedate > '2014-08-12';
 
 
+
+select updatedate, updatetime from facility order by 1 desc, 2 desc;

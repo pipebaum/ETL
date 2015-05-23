@@ -157,6 +157,7 @@
   <hop> <from>getDate</from><to>setDataType</to><enabled>Y</enabled> </hop>
   <hop> <from>getNewData</from><to>localUpdate</to><enabled>Y</enabled> </hop>
   <hop> <from>setDataType</from><to>getNewData</to><enabled>Y</enabled> </hop>
+  <hop> <from>getNewData</from><to>awsUpdate</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>getDate</name>
@@ -228,8 +229,26 @@
       <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
       <table>orders</table>
       <key>
-        <name>ID</name>
-        <field>ID</field>
+        <name>RES_ALPHA</name>
+        <field>RES_ALPHA</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>RES_NUM</name>
+        <field>RES_NUM</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>PROCEDR</name>
+        <field>PROCEDR</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>ENCOUNTER</name>
+        <field>ENCOUNTER</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
@@ -378,6 +397,131 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>224</xloc>
       <yloc>96</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>awsUpdate</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>aws_mysql</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
+      <table>orders</table>
+      <key>
+        <name>RES_ALPHA</name>
+        <field>RES_ALPHA</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>RES_NUM</name>
+        <field>RES_NUM</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>PROCEDR</name>
+        <field>PROCEDR</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>ENCOUNTER</name>
+        <field>ENCOUNTER</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>RES_ALPHA</name>
+        <rename>RES_ALPHA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>RES_NUM</name>
+        <rename>RES_NUM</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>PROCEDR</name>
+        <rename>PROCEDR</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>NOTES</name>
+        <rename>NOTES</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ENCOUNTER</name>
+        <rename>ENCOUNTER</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>PROFILE</name>
+        <rename>PROFILE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>STATUS</name>
+        <rename>STATUS</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>RESULTTYPE</name>
+        <rename>RESULTTYPE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UPDATEDATE</name>
+        <rename>UPDATEDATE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UPDATETIME</name>
+        <rename>UPDATETIME</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>TEST_DATE</name>
+        <rename>TEST_DATE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>POST_TIME</name>
+        <rename>POST_TIME</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>TEST_STATUS</name>
+        <rename>TEST_STATUS</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>STAT</name>
+        <rename>STAT</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>Reportable</name>
+        <rename>Reportable</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>480</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

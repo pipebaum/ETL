@@ -159,6 +159,7 @@
   <hop> <from>getDate</from><to>date2int</to><enabled>Y</enabled> </hop>
   <hop> <from>getNewData</from><to>int2date</to><enabled>Y</enabled> </hop>
   <hop> <from>int2date</from><to>localUpdate</to><enabled>Y</enabled> </hop>
+  <hop> <from>int2date</from><to>awsUpdate</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>chgDataType</name>
@@ -377,6 +378,68 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>576</xloc>
       <yloc>32</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>awsUpdate</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>aws_mysql</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
+      <table>rescodes</table>
+      <key>
+        <name>CODE</name>
+        <field>CODE</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>CODE</name>
+        <rename>CODE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>DESCRIPTION</name>
+        <rename>DESCRIPTION</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UPDATEDATE</name>
+        <rename>UPDATEDATE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UPDATETIME</name>
+        <rename>UPDATETIME</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>Abnormal</name>
+        <rename>Abnormal</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>TEST</name>
+        <rename>TEST</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>576</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

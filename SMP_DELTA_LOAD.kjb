@@ -205,7 +205,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C&#x3a;&#x5c;pdi&#x5c;ETL&#x5c;ENCORDR_delta.ktr</filename>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;ENCORDR_delta.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -271,7 +271,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C&#x3a;&#x5c;pdi&#x5c;ETL&#x5c;ENCOUNTER_delta.ktr</filename>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;ENCOUNTER_delta.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -304,7 +304,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C&#x3a;&#x5c;pdi&#x5c;ETL&#x5c;INSURANC_delta.ktr</filename>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;INSURANC_delta.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -337,7 +337,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C&#x3a;&#x5c;pdi&#x5c;ETL&#x5c;PATIENT_delta.ktr</filename>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;PATIENT_delta.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -370,7 +370,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C&#x3a;&#x5c;pdi&#x5c;ETL&#x5c;PROCEDUR_delta.ktr</filename>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;PROCEDUR_delta.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -403,7 +403,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C&#x3a;&#x5c;pdi&#x5c;ETL&#x5c;RESCODES_delta.ktr</filename>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;RESCODES_delta.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -436,7 +436,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C&#x3a;&#x5c;pdi&#x5c;ETL&#x5c;ORDER_delta.ktr</filename>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;ORDER_delta.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -465,6 +465,96 @@
       </entry>
   </entries>
   <hops>
+    <hop>
+      <from>START</from>
+      <to>Doctors</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Doctors</from>
+      <to>Profile</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Profile</from>
+      <to>ENCORDR</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>ENCORDR</from>
+      <to>FACILITY</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>FACILITY</from>
+      <to>ENCOUNTER</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>ENCOUNTER</from>
+      <to>ORDER</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>ORDER</from>
+      <to>RESCODES</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>RESCODES</from>
+      <to>PROCEDUR</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>PROCEDUR</from>
+      <to>PATIENT</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>PATIENT</from>
+      <to>INSURANC</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
   </notepads>

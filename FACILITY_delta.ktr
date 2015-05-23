@@ -157,6 +157,7 @@
   <hop> <from>getDate</from><to>setDataType</to><enabled>Y</enabled> </hop>
   <hop> <from>getNewData</from><to>localUpdate</to><enabled>Y</enabled> </hop>
   <hop> <from>setDataType</from><to>getNewData</to><enabled>Y</enabled> </hop>
+  <hop> <from>getNewData</from><to>awsUpdate</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>getDate</name>
@@ -170,7 +171,7 @@
            <schema_name/>
            </partitioning>
     <connection>mysql-local</connection>
-    <sql>select updatedate d1&#xa;, updatedate d2&#xa;, updatetime t1&#xa;from FACILITY&#xa;order by updatedate desc, updatetime desc&#xa;limit 1&#x3b;&#xa;</sql>
+    <sql>select updatedate d1&#xa;, updatedate d2&#xa;, updatetime t1&#xa;from facility&#xa;order by updatedate desc, updatetime desc&#xa;limit 1&#x3b;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -196,7 +197,7 @@
            <schema_name/>
            </partitioning>
     <connection>PVSQL</connection>
-    <sql>select &#xd;&#xa;	ID&#xd;&#xa;,	NAME&#xd;&#xa;,	ADDRESS&#xd;&#xa;,	CITY&#xd;&#xa;,	STATE&#xd;&#xa;,	ZIP&#xd;&#xa;,	PHONENUM&#xd;&#xa;,	SENDRESULTSFAXNBR&#xd;&#xa;,	SALESREPRESENTATIVE&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;from &#xd;&#xa;	facility&#xa;where updatedate &#x3e; &#x3f;&#xa;or &#x28;updatedate &#x3d; &#x3f; and updatetime &#x3e; &#x3f;&#x29;&#xa;&#x3b;</sql>
+    <sql>select &#xd;&#xa;	ID&#xd;&#xa;,	NAME&#xd;&#xa;,	ADDRESS&#xd;&#xa;,	CITY&#xd;&#xa;,	STATE&#xd;&#xa;,	ZIP&#xd;&#xa;,	PHONENUM&#xd;&#xa;,	SENDRESULTSFAXNBR&#xd;&#xa;,	SALESREPRESENTATIVE&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;from &#xd;&#xa;	FACILITY&#xa;where updatedate &#x3e; &#x3f;&#xa;or &#x28;updatedate &#x3d; &#x3f; and updatetime &#x3e; &#x3f;&#x29;&#xa;&#x3b;</sql>
     <limit>0</limit>
     <lookup>setDataType</lookup>
     <execute_each_row>N</execute_each_row>
@@ -226,7 +227,7 @@
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
-      <table>FACILITY</table>
+      <table>facility</table>
       <key>
         <name>ID</name>
         <field>ID</field>
@@ -285,7 +286,7 @@
       </value>
       <value>
         <name>UpdateTime</name>
-        <rename/>
+        <rename>UpdateTime</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -358,6 +359,93 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>160</xloc>
       <yloc>96</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>awsUpdate</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>aws_mysql</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
+      <table>facility</table>
+      <key>
+        <name>ID</name>
+        <field>ID</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>ID</name>
+        <rename>ID</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>NAME</name>
+        <rename>NAME</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>ADDRESS</name>
+        <rename>ADDRESS</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>CITY</name>
+        <rename>CITY</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>STATE</name>
+        <rename>STATE</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>ZIP</name>
+        <rename>ZIP</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>PhoneNum</name>
+        <rename>PhoneNum</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>SendResultsFaxNbr</name>
+        <rename>SendResultsFaxNbr</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>SalesRepresentative</name>
+        <rename>SalesRepresentative</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>UpdateDate</name>
+        <rename>UpdateDate</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>UpdateTime</name>
+        <rename>UpdateTime</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>416</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

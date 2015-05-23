@@ -159,7 +159,6 @@
   <hop> <from>getDate</from><to>date2int</to><enabled>Y</enabled> </hop>
   <hop> <from>getNewData</from><to>int2date</to><enabled>Y</enabled> </hop>
   <hop> <from>int2date</from><to>localUpdate</to><enabled>Y</enabled> </hop>
-  <hop> <from>int2date</from><to>awsUpdate</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>chgDataType</name>
@@ -390,6 +389,11 @@
         <rename>UpdateDate</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>UpdateTime</name>
+        <rename>UpdateTime</rename>
+        <update>Y</update>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -467,6 +471,11 @@
       <value>
         <name>UpdateDate</name>
         <rename>UpdateDate</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UpdateTime</name>
+        <rename>UpdateTime</rename>
         <update>Y</update>
       </value>
     </lookup>

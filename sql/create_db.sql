@@ -153,7 +153,7 @@ CREATE TABLE orders (
                 Reportable INT,
                 UpdateDate DATE,
                 UpdateTime TIME,
-                PRIMARY KEY (RES_ALPHA, RES_NUM)
+                PRIMARY KEY (RES_ALPHA, RES_NUM, ENCOUNTER, PROCEDR)
 );
 
 

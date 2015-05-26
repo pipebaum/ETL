@@ -27,7 +27,8 @@ where updatedate > '2015-04-08'
 or (updatetime > '17:00:00' and updatedate = '2015-04-08');
 
 delete from procedur 
-where updatedate > '2015-04-02';
+where status = 1
+and updatedate > '2015-04-02';
 
 delete from profile 
 where updatedate > '2015-03-15';

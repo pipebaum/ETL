@@ -35,13 +35,14 @@ or (updatetime > '17:00:00' and updatedate = '2015-04-08')
 union all
 select 'procedur', 5, count(*)
 from procedur
-where updatedate > '2015-04-02'
+where status = 1
+and updatedate > '2015-04-02'
 union all
 select 'profile', 4, count(*)
 from profile
 where updatedate > '2015-03-15'
 union all
-select 'rescodes', 9, count(*)
+select 'rescodes', 69, count(*)
 from rescodes
 where updatedate > '2014-08-12';
 

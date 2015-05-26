@@ -160,6 +160,58 @@
   <hop> <from>getNewData</from><to>awsUpdate</to><enabled>Y</enabled> </hop>
   </order>
   <step>
+    <name>awsUpdate</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>aws_mysql</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
+      <table>insuranc</table>
+      <key>
+        <name>CODE</name>
+        <field>CODE</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>CODE</name>
+        <rename>CODE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>NAME</name>
+        <rename>NAME</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UpdateDate</name>
+        <rename>UpdateDate</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UpdateTime</name>
+        <rename>UpdateTime</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>416</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>getDate</name>
     <type>TableInput</type>
     <description/>
@@ -324,58 +376,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>160</xloc>
       <yloc>64</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>awsUpdate</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>aws_mysql</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
-      <table>insuranc</table>
-      <key>
-        <name>CODE</name>
-        <field>CODE</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>CODE</name>
-        <rename>CODE</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>NAME</name>
-        <rename>NAME</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>UpdateDate</name>
-        <rename>UpdateDate</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>UpdateTime</name>
-        <rename>UpdateTime</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>416</xloc>
-      <yloc>96</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

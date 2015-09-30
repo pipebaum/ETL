@@ -51,6 +51,10 @@ end script
 		
 		mysql -uroot -p to confirm that you can login.
 		
+		NOTE: To change password at command line, login and perform following
+		use mysql;
+		SET PASSWORD FOR 'root'@'localhost' = PASSWORD('new-password-here');
+		
 4) Get GIT
 		sudo apt-get install git
 		
@@ -61,8 +65,8 @@ end script
 
 6) Install Pentaho /opt/pentaho
 		mkdir /opt/pentaho
-		copy and unzip pentaho zip file into pdi directory rename data-integration to current version of pdi.
-		e.g. /opt/pentaho/pdi-ce-5.3.0.0-213
+		copy and unzip pentaho zip file into pdi directory.
+		e.g. /opt/pentaho/data_integration
 		go to the directory and run spoon.sh to confirm that it works
 
 7) Create Pentaho user account
@@ -73,17 +77,21 @@ end script
 		sudo chown pentaho:pentaho .ssh
 		login as the pentaho user
 		
-8) Clone project into appropriate working directory
+7b) Give ownership of the pentaho/data_integration directory to pentaho
+		sudo chown -R pentaho:pentaho /opt/pentaho/data_integration
+		
+8a) Login as pentaho user for additional work
+		su pentaho
+		whoami   'to test that you are now logged in as pentaho
+
+8b) Use GIT to Clone project into appropriate working directory
+		Do this while user pentaho
 		cd /etl/prod
 		git clone "https://github.com/pipebaum/ETL.git"
 		chmod pentaho:pentaho /etl/prod/ETL
 		
 		references to $ETL_HOME mean use /etl/prod/ETL
 		
-8b) Login as pentaho user for additional work
-		su pentaho
-		whoami   'to test that you are now logged in as pentaho
-
 9) Setup kettle.properties
 
 		cd ~
@@ -93,8 +101,8 @@ end script
 		search for any variables that start with SMP_ and change appropriately
 		If no kettle.properties exists, create the file and add the following.
 		
-		At this time the configuration properties are:
-			SMP_AWS_HOST_IP=54.69.142.168
+		At this time the configuration properties for PROD are: 
+			SMP_AWS_HOST_IP=52.88.222.123
 			SMP_AWS_HOST_PASSPHRASE=simplelabs
 			SMP_AWS_HOST_USER=scottr
 			SMP_AWS_PEM_FILE=/pdi/SMPLABS_AWSKeyPair.pem
@@ -116,6 +124,9 @@ end script
 		/home/pentaho/.kettle/something.pem 
 		is better than
 		~/.kettle/something.pem 
+		
+9b) Permissions on the file in .kettle should be restricted!
+		chmod 600 ~/.kettle/*.*
 	
 10) The scripts use MySql local-path configurations to connect to MySQL
 		info here: http://dev.mysql.com/doc/refman/5.6/en/mysql-config-editor.html
@@ -133,7 +144,7 @@ end script
 		You will need to change the connection properties in this file to point to the appropriate location.
 		
 12) Validate that you have connectivity to the AWS Server
-		ssh -i ~/SMPLABS_AWSKeyPair.pem 54.69.142.168
+		ssh -i ~/SMPLABS_AWSKeyPair.pem 52.88.222.123
 		You need to configure AWS to accept the pentaho user over SSH. 
 		See Setup Instructions - AWS for instructions on how to do that.
 		

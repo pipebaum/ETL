@@ -13,6 +13,31 @@
     <parameters>
     </parameters>
   <connection>
+    <name>Data Warehouse</name>
+    <server>&#x24;&#x7b;DB_HOST&#x7d;</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>&#x24;&#x7b;DB_SCHEMA&#x7d;</database>
+    <port>3306</port>
+    <username>&#x24;&#x7b;DB_USER&#x7d;</username>
+    <password>&#x24;&#x7b;DB_PASSWORD&#x7d;</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
     <name>mysql-local</name>
     <server>localhost</server>
     <type>MYSQL</type>
@@ -111,7 +136,7 @@
       <name>SQL_DUMP</name>
       <description/>
       <type>SHELL</type>
-      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;scripts&#x2f;sql_dump_all.sh</filename>
+      <filename/>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -121,11 +146,9 @@
       <logext/>
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <insertScript>N</insertScript>
-      <script/>
+      <insertScript>Y</insertScript>
+      <script>&#x23;echo &#x22;home &#x22; &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#xd;&#xa;&#x23;echo &#x22;DB&#x22; &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;&#xd;&#xa;&#xd;&#xa;if &#x5b; &#x21; -d &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump &#x5d;&#x3b; then&#xd;&#xa;	echo &#x22;Make file&#x22;&#xd;&#xa;	mkdir &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#xd;&#xa;else&#xd;&#xa;	echo &#x22;Not Make File&#x22;&#xd;&#xa;fi&#xd;&#xa;&#xd;&#xa;mysqldump --login-path&#x3d;local &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d; encountr encordr patient doctors profile procedur facility rescodes insuranc &#x7c; gzip &#x3e; &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;alldates.dump.gz&#xd;&#xa;if &#x5b; &#x21; -f &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;alldates.dump.gz &#x5d;&#x3b; then&#xd;&#xa;   echo &#x22;File alldates does not exist after dump&#x22;&#xd;&#xa;   exit 1&#xd;&#xa;fi&#xd;&#xa;&#xd;&#xa;mysqldump --login-path&#x3d;local &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d; orders --where&#x3d;&#x22;updatedate&#x3e;&#x3d;DATE_SUB&#x28;NOW&#x28;&#x29;,INTERVAL 1 YEAR&#x29;&#x22; &#x7c; gzip &#x3e; &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;datelimit.dump.gz&#xd;&#xa;if &#x5b; &#x21; -f &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;alldates.dump.gz &#x5d;&#x3b; then&#xd;&#xa;   echo &#x22;File datelimits does not exist after dump&#x22;&#xd;&#xa;   exit 1&#xd;&#xa;fi&#xd;&#xa;&#xd;&#xa;touch &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;dump_complete_&#x24;&#x28;date &#x2b;&#x22;&#x25;m_&#x25;d_&#x25;Y_&#x25;H_&#x25;M_&#x25;S&#x22;&#x29;.txt</script>
       <loglevel>Basic</loglevel>
-      <argument0>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</argument0>
-      <argument1>&#x24;&#x7b;SMP_ETL_HOME&#x7d;</argument1>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -136,7 +159,7 @@
       <name>Transfer_2_AWS</name>
       <description/>
       <type>SHELL</type>
-      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;scripts&#x2f;transfer_2_aws.sh</filename>
+      <filename/>
       <work_directory/>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -146,11 +169,9 @@
       <logext/>
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <insertScript>N</insertScript>
-      <script/>
+      <insertScript>Y</insertScript>
+      <script>&#x23; &#x24;&#x7b;SMP_AWS_PEM_FILE&#x7d;&#xd;&#xa;&#x23; &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#xd;&#xa;&#x23; &#x24;&#x7b;SMP_AWS_HOST_IP&#x7d;&#xd;&#xa;&#xd;&#xa;&#x23; move the dump file from local to the remote AWS server&#xd;&#xa;scp -i &#x24;&#x7b;SMP_AWS_PEM_FILE&#x7d; &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;&#x2a;.gz &#x24;&#x7b;SMP_AWS_HOST_IP&#x7d;&#x3a;&#x7e;&#xd;&#xa;echo &#x22;scp -i &#x24;&#x7b;SMP_AWS_PEM_FILE&#x7d; &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;&#x2a;.gz &#x24;&#x7b;SMP_AWS_HOST_IP&#x7d;&#x3a;&#x7e;&#x22;&#xd;&#xa;echo &#x22;moved db files&#x22;&#xd;&#xa;&#xd;&#xa;&#x23; move the run script - use latest version&#xd;&#xa;scp -i &#x24;&#x7b;SMP_AWS_PEM_FILE&#x7d; &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;aws&#x2f;&#x2a;.&#x2a; &#x24;&#x7b;SMP_AWS_HOST_IP&#x7d;&#x3a;&#x7e;&#xd;&#xa;echo &#x22;scp -i &#x24;&#x7b;SMP_AWS_PEM_FILE&#x7d; &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;aws&#x2f;&#x2a;.&#x2a; &#x24;&#x7b;SMP_AWS_HOST_IP&#x7d;&#x3a;&#x7e;&#x22;&#xd;&#xa;echo &#x22;moved script files&#x22;&#xd;&#xa;&#xd;&#xa;touch &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;xfer_complete_&#x24;&#x28;date &#x2b;&#x22;&#x25;m_&#x25;d_&#x25;Y_&#x25;H_&#x25;M_&#x25;S&#x22;&#x29;.txt</script>
       <loglevel>Basic</loglevel>
-      <argument0>&#x24;&#x7b;SMP_AWS_PEM_FILE&#x7d;</argument0>
-      <argument1>&#x24;&#x7b;SMP_ETL_HOME&#x7d;</argument1>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>

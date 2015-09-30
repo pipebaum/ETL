@@ -71,7 +71,6 @@
     <attributes>
       <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>com.pervasive.jdbc.v2.Driver</attribute></attribute>
       <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;pervasive&#x3a;&#x2f;&#x2f;192.168.0.53&#x3a;1583&#x2f;HORIZON</attribute></attribute>
-<!--      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;pervasive&#x3a;&#x2f;&#x2f;192.168.0.70&#x3a;1583&#x2f;SUNRISE650</attribute></attribute> -->
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>

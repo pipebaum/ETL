@@ -131,9 +131,13 @@ end script
 10) The scripts use MySql local-path configurations to connect to MySQL
 		info here: http://dev.mysql.com/doc/refman/5.6/en/mysql-config-editor.html
 		MySQL has a utility that will allow you to build the required connections which are stored
-		for any user that is calling the scripts.
-		To simplify things, simply run the $ETL_HOME/scripts/create_config.sh and provide the appropriate
-		password.
+		for any user that is calling the scripts. To run it simply enter the following at command line:
+			mysql_config_editor set --login-path=local --host=localhost --user=root --password
+
+		You can look at the local config file settings by running the following.
+			mysql_config_editor print --all
+
+		
 		NOTE: For bulk load we are using the root user, since all access is local. 
 		You may want to change to use a different user. If you do you will need to modify the database config files
 		and the mysql-config-editor settings

@@ -124,6 +124,9 @@ end script
 		/home/pentaho/.kettle/something.pem 
 		is better than
 		~/.kettle/something.pem 
+		
+9b) Permissions on the file in .kettle should be restricted!
+		chmod 600 ~/.kettle/*.*
 	
 10) The scripts use MySql local-path configurations to connect to MySQL
 		info here: http://dev.mysql.com/doc/refman/5.6/en/mysql-config-editor.html

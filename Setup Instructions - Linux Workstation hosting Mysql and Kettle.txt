@@ -51,6 +51,10 @@ end script
 		
 		mysql -uroot -p to confirm that you can login.
 		
+		NOTE: To change password at command line, login and perform following
+		use mysql;
+		SET PASSWORD FOR 'root'@'localhost' = PASSWORD('new-password-here');
+		
 4) Get GIT
 		sudo apt-get install git
 		
@@ -76,17 +80,18 @@ end script
 7b) Give ownership of the pentaho/data_integration directory to pentaho
 		sudo chown -R pentaho:pentaho /opt/pentaho/data_integration
 		
-8) Use GIT to Clone project into appropriate working directory
+8a) Login as pentaho user for additional work
+		su pentaho
+		whoami   'to test that you are now logged in as pentaho
+
+8b) Use GIT to Clone project into appropriate working directory
+		Do this while user pentaho
 		cd /etl/prod
 		git clone "https://github.com/pipebaum/ETL.git"
 		chmod pentaho:pentaho /etl/prod/ETL
 		
 		references to $ETL_HOME mean use /etl/prod/ETL
 		
-8b) Login as pentaho user for additional work
-		su pentaho
-		whoami   'to test that you are now logged in as pentaho
-
 9) Setup kettle.properties
 
 		cd ~
@@ -96,8 +101,8 @@ end script
 		search for any variables that start with SMP_ and change appropriately
 		If no kettle.properties exists, create the file and add the following.
 		
-		At this time the configuration properties are:
-			SMP_AWS_HOST_IP=54.69.142.168
+		At this time the configuration properties for PROD are: 
+			SMP_AWS_HOST_IP=52.88.222.123
 			SMP_AWS_HOST_PASSPHRASE=simplelabs
 			SMP_AWS_HOST_USER=scottr
 			SMP_AWS_PEM_FILE=/pdi/SMPLABS_AWSKeyPair.pem
@@ -136,7 +141,7 @@ end script
 		You will need to change the connection properties in this file to point to the appropriate location.
 		
 12) Validate that you have connectivity to the AWS Server
-		ssh -i ~/SMPLABS_AWSKeyPair.pem 54.69.142.168
+		ssh -i ~/SMPLABS_AWSKeyPair.pem 52.88.222.123
 		You need to configure AWS to accept the pentaho user over SSH. 
 		See Setup Instructions - AWS for instructions on how to do that.
 		

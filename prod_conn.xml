@@ -7,7 +7,7 @@
     <access>Native</access>
     <database>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</database>
     <port>3306</port>
-    <username>fred</username>
+    <username>root</username>
     <password>Encrypted 2be98afc86aa7f2e4cb0aa360d293adc9</password>
     <servername/>
     <data_tablespace/>

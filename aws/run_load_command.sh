@@ -29,6 +29,12 @@ else
    exit 1
 fi
 
+if [ ! -d "olddump" ];
+then
+   mkdir olddump
+fi
+
+
 
 # unzip (zcat) the file and pipe to the mysql connecting on the local config path, 
 # use the database passed as a parameter

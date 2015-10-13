@@ -82,14 +82,16 @@
     <access>Native</access>
     <database>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</database>
     <port>3306</port>
-    <username>fred</username>
+    <username>root</username>
     <password>Encrypted 2be98afc86aa7f2e4cb0aa360d293adc9</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
       <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.rewriteBatchedStatements</code><attribute>true</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCompression</code><attribute>true</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.userServerPrepStmts</code><attribute>false</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
@@ -116,7 +118,10 @@
     <index_tablespace/>
     <attributes>
       <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.rewriteBatchedStatements</code><attribute>true</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCompression</code><attribute>true</attribute></attribute>
       <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useServerPrepStmts</code><attribute>false</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
@@ -171,7 +176,7 @@
            <schema_name/>
            </partitioning>
     <connection>PVSQL</connection>
-    <sql>select&#xd;&#xa;	PROCEDR&#xd;&#xa;,	NOTES&#xd;&#xa;,	ENCOUNTER&#xd;&#xa;,	PROFILE&#xd;&#xa;,	STATUS&#xd;&#xa;,	RESULTTYPE&#xd;&#xa;,	RES_ALPHA&#xd;&#xa;,	RES_NUM&#xd;&#xa;,	TEST_DATE&#xd;&#xa;,	POST_TIME&#xd;&#xa;,	TEST_STATUS&#xd;&#xa;,	STAT&#xd;&#xa;,	REPORTABLE&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;FROM &#xd;&#xa;	&#x22;ORDER&#x22;&#xd;&#xa;WHERE&#xa;	UPDATEDATE &#x3e;&#x3d; &#x27;2014-01-01&#x27;</sql>
+    <sql>select&#xd;&#xa;	ENCOUNTER&#xd;&#xa;,	PROCEDR&#xd;&#xa;,	PROFILE&#xd;&#xa;,	STATUS&#xa;,	SHEDULEDLAB&#xd;&#xa;,	RESULTTYPE&#xd;&#xa;,	RES_ALPHA&#xa;,	RES_NUM&#xd;&#xa;,	TEST_DATE&#xd;&#xa;,	POST_TIME&#xd;&#xa;,	TEST_STATUS&#xd;&#xa;,	STAT&#xd;&#xa;,	REPORTABLE&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;,	NOTES&#xa;FROM &#xd;&#xa;	&#x22;ORDER&#x22;&#xd;&#xa;WHERE&#xa;	UPDATEDATE &#x3e;&#x3d; &#x27;2014-01-01&#x27;&#xa;ORDER BY UPDATEDATE DESC</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -209,18 +214,13 @@
     <fifo_file_name>&#x2f;tmp&#x2f;orders.fifo</fifo_file_name>
     <bulk_size>20000</bulk_size>
       <mapping>
-        <stream_name>PROCEDR</stream_name>
-        <field_name>PROCEDR</field_name>
-        <field_format_ok>OK</field_format_ok>
-      </mapping>
-      <mapping>
-        <stream_name>NOTES</stream_name>
-        <field_name>NOTES</field_name>
-        <field_format_ok>OK</field_format_ok>
-      </mapping>
-      <mapping>
         <stream_name>ENCOUNTER</stream_name>
         <field_name>ENCOUNTER</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>PROCEDR</stream_name>
+        <field_name>PROCEDR</field_name>
         <field_format_ok>OK</field_format_ok>
       </mapping>
       <mapping>
@@ -231,6 +231,16 @@
       <mapping>
         <stream_name>STATUS</stream_name>
         <field_name>STATUS</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>SheduledLab</stream_name>
+        <field_name>SheduledLab</field_name>
+        <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>RES_ALPHA</stream_name>
+        <field_name>SheduledLab</field_name>
         <field_format_ok>OK</field_format_ok>
       </mapping>
       <mapping>
@@ -282,6 +292,11 @@
         <stream_name>UpdateTime</stream_name>
         <field_name>UpdateTime</field_name>
         <field_format_ok>OK</field_format_ok>
+      </mapping>
+      <mapping>
+        <stream_name>NOTES</stream_name>
+        <field_name>NOTES</field_name>
+        <field_format_ok>STRING_ESC</field_format_ok>
       </mapping>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>

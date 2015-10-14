@@ -313,7 +313,7 @@
            <schema_name/>
            </partitioning>
     <connection>mysql-local</connection>
-    <sql>select&#xd;&#xa;	PROCEDR&#xd;&#xa;,	NOTES&#xd;&#xa;,	ENCOUNTER&#xd;&#xa;,	PROFILE&#xd;&#xa;,	STATUS&#xd;&#xa;,	RESULTTYPE&#xd;&#xa;,	RES_ALPHA&#xd;&#xa;,	RES_NUM&#xd;&#xa;,	TEST_DATE&#xd;&#xa;,	POST_TIME&#xd;&#xa;,	TEST_STATUS&#xd;&#xa;,	STAT&#xd;&#xa;,	REPORTABLE&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;FROM &#xd;&#xa;	smpetl.new_orders&#xa;&#x3b;</sql>
+    <sql>select&#xd;&#xa;	ENCOUNTER&#xa;,	PROCEDR&#xa;,	PROFILE&#xa;,	STATUS&#xa;,	SheduledLab&#xa;,	RESULTTYPE&#xa;,	RES_ALPHA&#xa;,	RES_NUM&#xa;,	TEST_DATE&#xa;,	POST_TIME&#xa;,	TEST_STATUS&#xa;,	STAT&#xa;,	REPORTABLE&#xa;,	UPDATEDATE&#xa;,	UPDATETIME&#xa;,	NOTES&#xd;&#xa;FROM &#xd;&#xa;	smpetl.new_orders&#xa;&#x3b;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -377,6 +377,12 @@
       <key>
         <name>STATUS</name>
         <field>STATUS</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>SheduledLab</name>
+        <field>SheduledLab</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
@@ -453,6 +459,11 @@
       <value>
         <name>Reportable</name>
         <rename>Reportable</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>SheduledLab</name>
+        <rename>SheduledLab</rename>
         <update>Y</update>
       </value>
     </lookup>

@@ -170,6 +170,35 @@
   <hop> <from>Add sequence</from><to>newOrders</to><enabled>Y</enabled> </hop>
   </order>
   <step>
+    <name>Add sequence</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <valuename>order_cnt</valuename>
+      <use_database>N</use_database>
+      <connection/>
+      <schema/>
+      <seqname>SEQ_</seqname>
+      <use_counter>Y</use_counter>
+      <counter_name>order_cnt</counter_name>
+      <start_at>1</start_at>
+      <increment_by>1</increment_by>
+      <max_value>999999999</max_value>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>512</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Text file output</name>
     <type>TextFileOutput</type>
     <description/>
@@ -419,14 +448,14 @@
       <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
       <table>orders</table>
       <key>
-        <name>PROCEDR</name>
-        <field>PROCEDR</field>
+        <name>ENCOUNTER</name>
+        <field>ENCOUNTER</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <key>
-        <name>ENCOUNTER</name>
-        <field>ENCOUNTER</field>
+        <name>PROCEDR</name>
+        <field>PROCEDR</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
@@ -463,17 +492,17 @@
       <value>
         <name>RES_ALPHA</name>
         <rename>RES_ALPHA</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>RES_NUM</name>
         <rename>RES_NUM</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>PROCEDR</name>
         <rename>PROCEDR</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>NOTES</name>
@@ -483,17 +512,17 @@
       <value>
         <name>ENCOUNTER</name>
         <rename>ENCOUNTER</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>PROFILE</name>
         <rename>PROFILE</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>STATUS</name>
         <rename>STATUS</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>RESULTTYPE</name>
@@ -538,7 +567,7 @@
       <value>
         <name>SheduledLab</name>
         <rename>SheduledLab</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
     </lookup>
      <cluster_schema/>
@@ -613,20 +642,20 @@
            <schema_name/>
            </partitioning>
     <connection>mysql-local</connection>
-    <commit>1</commit>
-    <update_bypassed>N</update_bypassed>
+    <commit>100</commit>
+    <update_bypassed>Y</update_bypassed>
     <lookup>
       <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
       <table>orders</table>
       <key>
-        <name>PROCEDR</name>
-        <field>PROCEDR</field>
+        <name>ENCOUNTER</name>
+        <field>ENCOUNTER</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <key>
-        <name>ENCOUNTER</name>
-        <field>ENCOUNTER</field>
+        <name>PROCEDR</name>
+        <field>PROCEDR</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
@@ -663,12 +692,12 @@
       <value>
         <name>RES_ALPHA</name>
         <rename>RES_ALPHA</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>RES_NUM</name>
         <rename>RES_NUM</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>PROCEDR</name>
@@ -683,17 +712,17 @@
       <value>
         <name>ENCOUNTER</name>
         <rename>ENCOUNTER</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>PROFILE</name>
         <rename>PROFILE</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>STATUS</name>
         <rename>STATUS</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>RESULTTYPE</name>
@@ -738,7 +767,7 @@
       <value>
         <name>SheduledLab</name>
         <rename>SheduledLab</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
     </lookup>
      <cluster_schema/>
@@ -848,35 +877,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>192</xloc>
       <yloc>96</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add sequence</name>
-    <type>Sequence</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <valuename>order_cnt</valuename>
-      <use_database>N</use_database>
-      <connection/>
-      <schema/>
-      <seqname>SEQ_</seqname>
-      <use_counter>Y</use_counter>
-      <counter_name>order_cnt</counter_name>
-      <start_at>1</start_at>
-      <increment_by>1</increment_by>
-      <max_value>999999999</max_value>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>512</xloc>
-      <yloc>128</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

@@ -13,8 +13,8 @@ The assumption is that you have gone through the basic start of an AWS instance
 		sudo useradd -m -d /home/pentaho -s /bin/bash -c "pentaho service account" -U pentaho
 		sudo passwd pentaho
 		sudo adduser pentaho sudo    'add user to sudoer group
-		sudo cp -r /home/root/.ssh ~/.
-		sudo chown pentaho:pentaho .ssh
+		sudo cp -r /home/ubuntu/.ssh ~/.
+		sudo chown -R pentaho:pentaho .ssh
 		login as the pentaho user
 		su pentaho
 		whoami   'to test that you are now logged in as pentaho

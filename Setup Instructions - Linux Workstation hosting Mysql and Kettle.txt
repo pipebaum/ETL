@@ -12,7 +12,7 @@ Linux Server Setup
 2) Install x11vnc 
 		sudo apt-get install x11vnc
 		sudo x11vnc -storepasswd /etc/x11vnc.pass
-		sudo chmod 600 x11vnc.pass
+		sudo chmod 600 /etc/x11vnc.pass
 		create a file in /etc/init
 		sudo vi /etc/init/x11vnc.conf
 		put the following in there:

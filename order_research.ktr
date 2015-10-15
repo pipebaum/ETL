@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>ORDER_delta</name>
+    <name>order_research</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -74,27 +74,6 @@
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
-    <notepad>
-      <note>This is some goofy stuff, but RES_NUM is a FLOAT &#xa;&#x28;and a part of the key&#x21;&#x29;&#xa;&#xa;So need to have a range around RES_NUM to do compare in case&#xa;there are small variations in value, including&#xa;&#xa;RES_NUM changes from 0.00 to 0.  Yes, saw it happen.</note>
-      <xloc>96</xloc>
-      <yloc>224</yloc>
-      <width>437</width>
-      <heigth>129</heigth>
-      <fontname>Ubuntu</fontname>
-      <fontsize>11</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
   </notepads>
   <connection>
     <name>aws_mysql</name>
@@ -182,11 +161,9 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>getDate</from><to>setDataType</to><enabled>Y</enabled> </hop>
-  <hop> <from>setDataType</from><to>getNewData</to><enabled>Y</enabled> </hop>
-  <hop> <from>getNewData</from><to>Res_num_range</to><enabled>Y</enabled> </hop>
-  <hop> <from>Res_num_range</from><to>awsUpdate</to><enabled>Y</enabled> </hop>
-  <hop> <from>Res_num_range</from><to>localUpdate</to><enabled>Y</enabled> </hop>
+  <hop> <from>getNewData</from><to>Modified Java Script Value</to><enabled>Y</enabled> </hop>
+  <hop> <from>Modified Java Script Value</from><to>localUpdate</to><enabled>Y</enabled> </hop>
+  <hop> <from>Modified Java Script Value</from><to>awsUpdate</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>awsUpdate</name>
@@ -330,34 +307,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>544</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>getDate</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>mysql-local</connection>
-    <sql>select updatedate d1&#xa;, updatedate d2&#xa;, updatetime t1&#xa;from orders&#xa;order by updatedate desc, updatetime desc&#xa;limit 1&#x3b;&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>96</xloc>
-      <yloc>96</yloc>
+      <xloc>448</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -374,15 +325,15 @@
            <schema_name/>
            </partitioning>
     <connection>PVSQL</connection>
-    <sql>select &#xd;&#xa;	ENCOUNTER&#xa;,	PROCEDR&#xd;&#xa;,	PROFILE&#xd;&#xa;,	STATUS&#xa;,	SheduledLab&#xd;&#xa;,	RESULTTYPE&#xd;&#xa;,	RES_ALPHA&#xd;&#xa;,	RES_NUM&#xd;&#xa;,	TEST_DATE&#xd;&#xa;,	POST_TIME&#xd;&#xa;,	TEST_STATUS&#xd;&#xa;,	STAT&#xd;&#xa;,	REPORTABLE&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;,	NOTES&#xa;FROM &#xd;&#xa;	&#x22;ORDER&#x22;&#xa;where updatedate &#x3e; &#x3f;&#xa;or &#x28;updatedate &#x3d; &#x3f; and updatetime &#x3e; &#x3f;&#x29;&#xa;ORDER BY UPDATEDATE, UPDATETIME&#xa;&#x3b;</sql>
+    <sql>select ENCOUNTER,&#xa;	PROCEDR,&#xa;	PROFILE, &#xa;	STATUS, &#xa;	SheduledLab, &#xa;	RESULTTYPE, &#xa;	RES_ALPHA, &#xa;	RES_NUM, &#xa;	TEST_DATE,	&#xa;	POST_TIME,	&#xa;	TEST_STATUS, &#xa;	STAT, &#xa;	REPORTABLE,	&#xa;	UPDATEDATE,	&#xa;	UPDATETIME,&#xa;	NOTES&#xa;from &#x22;order&#x22; where encounter &#x3d; 15064618 &#xa;AND PROCEDR &#x3d; &#x27;KETO&#x27;&#xa;AND PROFILE&#x3d;&#x27;U&#x27;&#x3b;&#xa;&#xa;</sql>
     <limit>0</limit>
-    <lookup>setDataType</lookup>
+    <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
+    <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>288</xloc>
+      <xloc>64</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
       </GUI>
@@ -530,79 +481,14 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>544</xloc>
-      <yloc>32</yloc>
+      <xloc>448</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>setDataType</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>        <select_unspecified>N</select_unspecified>
-      <meta>        <name>d1</name>
-        <rename>d1</rename>
-        <type>String</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>yyyy-MM-dd</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>d2</name>
-        <rename>d2</rename>
-        <type>String</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>yyyy-MM-dd</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>t1</name>
-        <rename>t1</rename>
-        <type>String</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>HH&#x3a;mm&#x3a;ss</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>192</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Res_num_range</name>
+    <name>Modified Java Script Value</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>N</distribute>
@@ -616,7 +502,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f;Need to create a range around Res_num since it is a float&#xa;var rn1 &#x3d; RES_NUM - .01&#x3b;&#xa;var rn2 &#x3d; RES_NUM &#x2b; .01&#x3b;&#xa;&#xa;&#xa;</jsScript_script>
+        <jsScript_script>&#x2f;&#x2f;Script here&#xa;var rn1 &#x3d; RES_NUM - .01&#x3b;&#xa;var rn2 &#x3d; RES_NUM &#x2b; .01&#x3b;&#xa;&#xa;&#xa;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>rn1</name>
         <rename>rn1</rename>
         <type>Number</type>
@@ -631,7 +517,7 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>416</xloc>
+      <xloc>256</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
       </GUI>

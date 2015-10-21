@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>CREATE_TABLES</name>
+    <name>INIT_EVENTLOG</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -67,9 +67,9 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2015&#x2f;04&#x2f;16 16&#x3a;21&#x3a;57.137</created_date>
+  <created_date>2015&#x2f;10&#x2f;21 10&#x3a;20&#x3a;05.559</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;04&#x2f;16 16&#x3a;21&#x3a;57.137</modified_date>
+  <modified_date>2015&#x2f;10&#x2f;21 10&#x3a;20&#x3a;05.559</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -105,18 +105,20 @@
     </attributes>
   </connection>
   <connection>
-    <name>Data Warehouse</name>
-    <server>&#x24;&#x7b;DB_HOST&#x7d;</server>
+    <name>localhost</name>
+    <server>localhost</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>&#x24;&#x7b;DB_SCHEMA&#x7d;</database>
+    <database>pditest</database>
     <port>3306</port>
-    <username>&#x24;&#x7b;DB_USER&#x7d;</username>
-    <password>&#x24;&#x7b;DB_PASSWORD&#x7d;</password>
+    <username>admin</username>
+    <password>Encrypted 2be98afc86aa7f2e4ba2d97578dc0fb8b</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
@@ -211,10 +213,186 @@
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
+  <connection>
+    <name>rds-pdi-test</name>
+    <server>pditest.ckntenowhsbc.us-west-2.rds.amazonaws.com</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>pditest</database>
+    <port>3306</port>
+    <username>admin</username>
+    <password>Encrypted 2be98afc86aa7f2e4ba2d97578dc0fb8b</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>steve</name>
+    <server>pentaho.stephenschafer.com</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>pditest</database>
+    <port>3306</port>
+    <username>scott</username>
+    <password>Encrypted 2be98afc86aa7f2e4bb18bd63c99dbdde</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>steve2</name>
+    <server>vps3.stephenschafer.com</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>pditest</database>
+    <port>3306</port>
+    <username>scott</username>
+    <password>Encrypted 2be98afc86aa7f2e4bb18bd63c99dbdde</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>Sunrise</name>
+    <server/>
+    <type>GENERIC</type>
+    <access>Native</access>
+    <database/>
+    <port>-1</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>com.pervasive.jdbc.v2.Driver</attribute></attribute>
+      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;pervasive&#x3a;&#x2f;&#x2f;192.168.0.71&#x3a;1583&#x2f;SUNRISE650</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>-1</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
+  <hop> <from>trunc</from><to>Table input</to><enabled>Y</enabled> </hop>
+  <hop> <from>Table input</from><to>Seq</to><enabled>Y</enabled> </hop>
+  <hop> <from>Seq</from><to>hdlDate</to><enabled>Y</enabled> </hop>
+  <hop> <from>hdlDate</from><to>getCurDate</to><enabled>Y</enabled> </hop>
+  <hop> <from>getCurDate</from><to>Table output</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>CreateTable</name>
+    <name>Table input</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>PVSQL_h</connection>
+    <sql>SELECT top 1&#xa;EventDate&#xa;, EventTime&#xa;&#xa;from &#x22;EVENTLOG&#x22; with &#x28;index&#x28;K_PostedToPMEvent&#x29;&#x29;&#xa;where EventCode IN &#x28;&#x27;PLDLP&#x27;,&#x27;PLCHR&#x27;,&#x27;PLDLO&#x27;&#x29;&#xa;-- group by eventdate, eventtime&#xa;-- and EventDate &#x3d; 78456&#xa;order by 1 desc, 2 desc</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>160</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Table output</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>mysql-local</connection>
+    <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
+    <table>eventlog</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>N</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>576</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>trunc</name>
     <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
@@ -229,7 +407,7 @@
     <single_statement>N</single_statement>
     <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
-    <sql>CREATE TABLE rescodes &#x28;&#xd;&#xa;                CODE VARCHAR&#x28;6&#x29; NOT NULL,&#xd;&#xa;                DESCRIPTION TEXT,&#xd;&#xa;                Abnormal VARCHAR&#x28;2&#x29;,&#xd;&#xa;                TEST VARCHAR&#x28;6&#x29;,&#xd;&#xa;                UpdateDate DATE,&#xd;&#xa;                Updatetime TIME,&#xd;&#xa;                PRIMARY KEY &#x28;CODE, TEST&#x29;&#xd;&#xa;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;CREATE TABLE profile &#x28;&#xd;&#xa;                ID VARCHAR&#x28;6&#x29; NOT NULL,&#xd;&#xa;                PROCEDR VARCHAR&#x28;6&#x29; NOT NULL,&#xd;&#xa;                PRINT_SEQ INT,&#xd;&#xa;                UpdateDate DATE,&#xd;&#xa;                UpdateTime TIME,&#xd;&#xa;                PRIMARY KEY &#x28;ID, PROCEDR&#x29;&#xd;&#xa;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;CREATE TABLE procedur &#x28;&#xd;&#xa;                ALPHA VARCHAR&#x28;6&#x29; NOT NULL,&#xd;&#xa;                STATUS INT,&#xd;&#xa;                DESCR VARCHAR&#x28;120&#x29;,&#xd;&#xa;                TYPE CHAR&#x28;1&#x29;,&#xd;&#xa;                UNITS VARCHAR&#x28;10&#x29;,&#xd;&#xa;                TURN_AROUND VARCHAR&#x28;10&#x29;,&#xd;&#xa;                SPECIMEN VARCHAR&#x28;10&#x29;,&#xd;&#xa;                UpdateDate DATE NOT NULL,&#xd;&#xa;                UpdateTime TIME NOT NULL,&#xd;&#xa;                PRIMARY KEY &#x28;ALPHA&#x29;&#xd;&#xa;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;CREATE TABLE patient &#x28;&#xd;&#xa;                ID INT NOT NULL,&#xd;&#xa;                HISPatientID VARCHAR&#x28;20&#x29;,&#xd;&#xa;                Status CHAR&#x28;1&#x29;,&#xd;&#xa;                LNAME VARCHAR&#x28;40&#x29;,&#xd;&#xa;                FNAME VARCHAR&#x28;40&#x29;,&#xd;&#xa;                MNAME VARCHAR&#x28;40&#x29;,&#xd;&#xa;                STREET VARCHAR&#x28;120&#x29;,&#xd;&#xa;                Street1 VARCHAR&#x28;120&#x29;,&#xd;&#xa;                Street2 VARCHAR&#x28;120&#x29;,&#xd;&#xa;                CITY VARCHAR&#x28;40&#x29;,&#xd;&#xa;                STATE VARCHAR&#x28;40&#x29;,&#xd;&#xa;                ZIP VARCHAR&#x28;20&#x29;,&#xd;&#xa;                DOB DATETIME,&#xd;&#xa;                SEX VARCHAR&#x28;2&#x29;,&#xd;&#xa;                Race VARCHAR&#x28;6&#x29;,&#xd;&#xa;                PhoneNum VARCHAR&#x28;20&#x29;,&#xd;&#xa;                S_FNAME VARCHAR&#x28;15&#x29;,&#xd;&#xa;                S_LNAME VARCHAR&#x28;15&#x29;,&#xd;&#xa;                SS_FNAME VARCHAR&#x28;15&#x29;,&#xd;&#xa;                SS_LNAME VARCHAR&#x28;15&#x29;,&#xd;&#xa;                RELATION VARCHAR&#x28;2&#x29;,&#xd;&#xa;                S_RELATION VARCHAR&#x28;2&#x29;,&#xd;&#xa;                PRIM_INS VARCHAR&#x28;5&#x29;,&#xd;&#xa;                PRIM_INS_NUM VARCHAR&#x28;20&#x29;,&#xd;&#xa;                PRI_INS_GRP VARCHAR&#x28;20&#x29;,&#xd;&#xa;                SEC_INS VARCHAR&#x28;5&#x29;,&#xd;&#xa;                SEC_INS_NUM VARCHAR&#x28;20&#x29;,&#xd;&#xa;                SEC_INS_GRP VARCHAR&#x28;20&#x29;,&#xd;&#xa;                SSN VARCHAR&#x28;20&#x29;,&#xd;&#xa;                HeadofFamily INT,&#xd;&#xa;                UpdateDate DATE NOT NULL,&#xd;&#xa;                UpdateTime TIME NOT NULL,&#xd;&#xa;                PRIMARY KEY &#x28;ID&#x29;&#xd;&#xa;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;CREATE TABLE insuranc &#x28;&#xd;&#xa;                CODE VARCHAR&#x28;5&#x29; NOT NULL,&#xd;&#xa;                NAME VARCHAR&#x28;120&#x29;,&#xd;&#xa;                UpdateDate DATE NOT NULL,&#xd;&#xa;                UpdateTime TIME NOT NULL,&#xd;&#xa;                PRIMARY KEY &#x28;CODE&#x29;&#xd;&#xa;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;CREATE TABLE facility &#x28;&#xd;&#xa;                ID VARCHAR&#x28;10&#x29; NOT NULL,&#xd;&#xa;                NAME VARCHAR&#x28;120&#x29;,&#xd;&#xa;                ADDRESS VARCHAR&#x28;120&#x29;,&#xd;&#xa;                CITY VARCHAR&#x28;40&#x29;,&#xd;&#xa;                STATE VARCHAR&#x28;20&#x29;,&#xd;&#xa;                ZIP VARCHAR&#x28;20&#x29;,&#xd;&#xa;                PhoneNum VARCHAR&#x28;20&#x29;,&#xd;&#xa;                SendResultsFaxNbr VARCHAR&#x28;20&#x29;,&#xd;&#xa;                SalesRepresentative INT,&#xd;&#xa;                UpdateDate DATE NOT NULL,&#xd;&#xa;                UpdateTime TIME NOT NULL,&#xd;&#xa;                PRIMARY KEY &#x28;ID&#x29;&#xd;&#xa;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;CREATE TABLE doctors &#x28;&#xd;&#xa;                ID VARCHAR&#x28;10&#x29; NOT NULL,&#xd;&#xa;                NAME VARCHAR&#x28;120&#x29;,&#xd;&#xa;                CLIN_ABBR VARCHAR&#x28;10&#x29;,&#xd;&#xa;                STREET VARCHAR&#x28;120&#x29;,&#xd;&#xa;                CITY VARCHAR&#x28;40&#x29;,&#xd;&#xa;                STATE VARCHAR&#x28;20&#x29;,&#xd;&#xa;                ZIP VARCHAR&#x28;20&#x29;,&#xd;&#xa;                PhoneNum VARCHAR&#x28;20&#x29;,&#xd;&#xa;                FAX VARCHAR&#x28;20&#x29;,&#xd;&#xa;                UpdateDate DATE NOT NULL,&#xd;&#xa;                UpdateTime TIME NOT NULL,&#xd;&#xa;                PRIMARY KEY &#x28;ID&#x29;&#xd;&#xa;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;CREATE TABLE encountr &#x28;&#xd;&#xa;                NUMBER INT NOT NULL,&#xd;&#xa;                PATIENT INT,&#xd;&#xa;                DATE DATETIME,&#xd;&#xa;                TIME DATETIME,&#xd;&#xa;                EncounterScheduleDat DATETIME,&#xd;&#xa;                EncounterScheduleTim DATETIME,&#xd;&#xa;                STATUS INT,&#xd;&#xa;                INSURANCE VARCHAR&#x28;5&#x29;,&#xd;&#xa;                DOCTOR VARCHAR&#x28;10&#x29;,&#xd;&#xa;                DIAG VARCHAR&#x28;10&#x29;,&#xd;&#xa;                DIAG2 VARCHAR&#x28;10&#x29;,&#xd;&#xa;                DIAG3 VARCHAR&#x28;10&#x29;,&#xd;&#xa;                DIAG4 VARCHAR&#x28;10&#x29;,&#xd;&#xa;                REQUESTED_DT DATETIME,&#xd;&#xa;                REQUESTED_TI DATETIME,&#xd;&#xa;                OrderingFacility VARCHAR&#x28;10&#x29;,&#xd;&#xa;                CreateDate DATETIME,&#xd;&#xa;                CreateTime INT,&#xd;&#xa;                CreatedBy CHAR&#x28;1&#x29;,&#xd;&#xa;                UpdateDate DATE,&#xd;&#xa;                UpdateTime TIME,&#xd;&#xa;                PRIMARY KEY &#x28;NUMBER&#x29;&#xd;&#xa;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;CREATE TABLE orders &#x28;&#xd;&#xa;                ENCOUNTER INT,&#xa;                PROCEDR VARCHAR&#x28;6&#x29;,&#xd;&#xa;                PROFILE VARCHAR&#x28;6&#x29;,&#xd;&#xa;                STATUS CHAR&#x28;1&#x29;,&#xa;				SheduledLab VARCHAR&#x28;10&#x29;,&#xd;&#xa;                RESULTTYPE CHAR&#x28;1&#x29;,&#xd;&#xa;                RES_ALPHA VARCHAR&#x28;20&#x29;,&#xa;                RES_NUM DECIMAL&#x28;10,2&#x29;,&#xa;                TEST_DATE DATETIME,&#xd;&#xa;                POST_TIME DATETIME,&#xd;&#xa;                TEST_STATUS CHAR&#x28;1&#x29;,&#xd;&#xa;                STAT INT,&#xd;&#xa;                Reportable INT,&#xd;&#xa;                UpdateDate DATE,&#xd;&#xa;                UpdateTime TIME,&#xd;&#xa;                NOTES TEXT,&#xa;                PRIMARY KEY &#x28;ENCOUNTER, PROCEDR, PROFILE, STATUS, SHEDULEDLAB, RES_ALPHA, RES_NUM&#x29;&#xd;&#xa;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;CREATE TABLE encordr &#x28;&#xd;&#xa;                PROCEDR VARCHAR&#x28;6&#x29; NOT NULL,&#xd;&#xa;                ENCOUNTER INT NOT NULL,&#xd;&#xa;                CREATED_BY CHAR&#x28;1&#x29; NOT NULL,&#xd;&#xa;                STATUS CHAR&#x28;1&#x29;,&#xd;&#xa;                STAT INT,&#xd;&#xa;                Specimen VARCHAR&#x28;2&#x29;,&#xd;&#xa;                UpdateDate DATE,&#xd;&#xa;                UpdateTime TIME,&#xd;&#xa;                PRIMARY KEY &#x28;PROCEDR, ENCOUNTER, CREATED_BY&#x29;&#xd;&#xa;&#x29;&#x3b;&#xa;&#xa;CREATE TABLE eventlog &#x28; &#xa;				eventlog_pk INT not null,&#xa;                EventDate INT,&#xa;                EventTime INT, &#xa;                eventdateAsDate DATETIME, &#xa;                LoadDate DATETIME,&#xa;				PRIMARY KEY &#x28;eventlog_pk&#x29;&#xa;&#x29;&#x3b;&#xd;&#xa;</sql>
+    <sql>truncate &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.eventlog&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -240,7 +418,94 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>64</xloc>
-      <yloc>32</yloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Seq</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <valuename>eventlog_pk</valuename>
+      <use_database>N</use_database>
+      <connection/>
+      <schema/>
+      <seqname>SEQ_</seqname>
+      <use_counter>Y</use_counter>
+      <counter_name/>
+      <start_at>1</start_at>
+      <increment_by>1</increment_by>
+      <max_value>999999999</max_value>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>256</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>hdlDate</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>1</jsScript_type>
+        <jsScript_name>init</jsScript_name>
+        <jsScript_script>var baseDate &#x3d; new Date&#x28;&#x27;12&#x2f;28&#x2f;1800&#x27;&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
+      </jsScript>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>OnRow</jsScript_name>
+        <jsScript_script>var eventdateAsDate &#x3d; dateAdd&#x28;baseDate,&#x27;d&#x27;, EventDate&#x29;&#x3b;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>eventdateAsDate</name>
+        <rename>eventdateAsDate</rename>
+        <type>Date</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>352</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>getCurDate</name>
+    <type>SystemInfo</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>LoadDate</name>
+        <type>system date &#x28;variable&#x29;</type>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>448</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

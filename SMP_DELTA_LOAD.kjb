@@ -4,6 +4,7 @@
     <description/>
     <extended_description/>
     <job_version/>
+    <job_status>0</job_status>
   <directory>&#x2f;</directory>
   <created_user>-</created_user>
   <created_date>2015&#x2f;05&#x2f;19 21&#x3a;05&#x3a;00.698</created_date>
@@ -48,7 +49,7 @@
     <database>smpetl</database>
     <port>3306</port>
     <username>root</username>
-    <password>Encrypted 2be98afc86aa7f2acfa1ea673ccc2a9ce</password>
+    <password>Encrypted 2be98afc86aa7f2e4cb0aa360d293adc9</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -495,12 +496,12 @@
       <yloc>128</yloc>
       </entry>
     <entry>
-      <name>Transformation</name>
+      <name>RPT_REVIEW_AUDIT</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C&#x3a;&#x5c;pdi&#x5c;ETL&#x5c;RPT_REVIEW_AUDIT_delta.ktr</filename>
+      <filename>&#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;RPT_REVIEW_AUDIT_delta.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -524,8 +525,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>32</xloc>
-      <yloc>128</yloc>
+      <xloc>128</xloc>
+      <yloc>256</yloc>
       </entry>
   </entries>
   <hops>
@@ -621,7 +622,7 @@
     </hop>
     <hop>
       <from>INSURANC</from>
-      <to>Transformation</to>
+      <to>RPT_REVIEW_AUDIT</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

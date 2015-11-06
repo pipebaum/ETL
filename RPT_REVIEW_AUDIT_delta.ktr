@@ -70,7 +70,7 @@
   <created_date>2015&#x2f;11&#x2f;06 09&#x3a;28&#x3a;18.556</created_date>
   <modified_user>-</modified_user>
   <modified_date>2015&#x2f;11&#x2f;06 09&#x3a;28&#x3a;18.556</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -112,7 +112,7 @@
     <database>smpetl</database>
     <port>3306</port>
     <username>root</username>
-    <password>Encrypted 2be98afc86aa7f2acfa1ea673ccc2a9ce</password>
+    <password>Encrypted 2be98afc86aa7f2e4cb0aa360d293adc9</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -187,11 +187,71 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>getDate</from><to>setDataType</to><enabled>Y</enabled> </hop>
-  <hop> <from>getNewData</from><to>localUpdate</to><enabled>Y</enabled> </hop>
-  <hop> <from>setDataType</from><to>getNewData</to><enabled>Y</enabled> </hop>
-  <hop> <from>getNewData</from><to>awsUpdate</to><enabled>Y</enabled> </hop>
+  <hop> <from>getDate</from><to>date2int</to><enabled>Y</enabled> </hop>
+  <hop> <from>getNewData</from><to>int2date</to><enabled>Y</enabled> </hop>
+  <hop> <from>int2date</from><to>localUpdate</to><enabled>Y</enabled> </hop>
+  <hop> <from>int2date</from><to>awsUpdate</to><enabled>Y</enabled> </hop>
+  <hop> <from>date2int</from><to>getNewData</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>awsUpdate</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>aws_mysql</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
+      <table>RptReviewAudit</table>
+      <key>
+        <name>Encounter</name>
+        <field>Encounter</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>RecordAddedDate</name>
+        <field>RecordAddedDate</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>RecordAddedTime</name>
+        <field>RecordAddedTime</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>Encounter</name>
+        <rename>Encounter</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>RecordAddedDate</name>
+        <rename>RecordAddedDate</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>RecordAddedTime</name>
+        <rename>RecordAddedTime</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>640</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step>
     <name>getDate</name>
     <type>TableInput</type>
@@ -212,7 +272,7 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>96</xloc>
+      <xloc>64</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
       </GUI>
@@ -230,15 +290,15 @@
            <schema_name/>
            </partitioning>
     <connection>PVSQL</connection>
-    <sql>select&#xa;	Encounter&#xa;,	RecordAddedDate&#xa;,	RecordAddedTime&#xa;from &#xa;	RptReviewAudit&#xa;where &#xd;&#xa;&#x28;&#xa;	RecordAddedDate &#x3e; &#x3f;&#xa;	or &#xa;	&#x28;RecordAddedDate &#x3d; &#x3f; and RecordAddedTime &#x3e; &#x3f;&#x29;&#xa;&#x29;&#xa;&#x3b;&#xa;&#xa;&#xa;&#xa;</sql>
+    <sql>select&#xa;	Encounter&#xa;,	RecordAddedDate RecordAddedDateInt&#xa;,	RecordAddedTime&#xa;from &#xa;	RptReviewAudit&#xa;where &#xd;&#xa;&#x28;&#xa;	RecordAddedDate &#x3e; &#x3f;&#xa;	or &#xa;	&#x28;RecordAddedDate &#x3d; &#x3f; and RecordAddedTime &#x3e; &#x3f;&#x29;&#xa;&#x29;&#xa;&#x3b;&#xa;&#xa;&#xa;&#xa;</sql>
     <limit>0</limit>
-    <lookup>setDataType</lookup>
+    <lookup>date2int</lookup>
     <execute_each_row>N</execute_each_row>
     <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>352</xloc>
+      <xloc>320</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
       </GUI>
@@ -260,7 +320,7 @@
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
-      <table>insuranc</table>
+      <table>RptReviewAudit</table>
       <key>
         <name>Encounter</name>
         <field>Encounter</field>
@@ -297,15 +357,15 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>480</xloc>
+      <xloc>640</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>setDataType</name>
-    <type>SelectValues</type>
+    <name>date2int</name>
+    <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -314,115 +374,63 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>        <select_unspecified>N</select_unspecified>
-      <meta>        <name>d1</name>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>1</jsScript_type>
+        <jsScript_name>init</jsScript_name>
+        <jsScript_script>var baseDate &#x3d; new Date&#x28;&#x27;12&#x2f;28&#x2f;1800&#x27;&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
+      </jsScript>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>OnRow</jsScript_name>
+        <jsScript_script>var d1 &#x3d; dateDiff&#x28;baseDate, d1, &#x27;d&#x27;&#x29;&#x3b;  &#xa;var d2 &#x3d; d1&#x3b;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>d1</name>
         <rename>d1</rename>
-        <type>String</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>yyyy-MM-dd</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>d2</name>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>      <field>        <name>d2</name>
         <rename>d2</rename>
-        <type>String</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>yyyy-MM-dd</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>t1</name>
-        <rename>t1</rename>
-        <type>String</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>HH&#x3a;mm&#x3a;ss</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>    </fields>     <cluster_schema/>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>224</xloc>
+      <xloc>192</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>awsUpdate</name>
-    <type>InsertUpdate</type>
+    <name>int2date</name>
+    <type>ScriptValueMod</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>aws_mysql</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
-      <table>insuranc</table>
-      <key>
-        <name>Encounter</name>
-        <field>Encounter</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>RecordAddedDate</name>
-        <field>RecordAddedDate</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>RecordAddedTime</name>
-        <field>RecordAddedTime</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>Encounter</name>
-        <rename>Encounter</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>RecordAddedDate</name>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>1</jsScript_type>
+        <jsScript_name>init</jsScript_name>
+        <jsScript_script>var baseDate &#x3d; new Date&#x28;&#x27;12&#x2f;28&#x2f;1800&#x27;&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
+      </jsScript>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>OnRow</jsScript_name>
+        <jsScript_script>var RecordAddedDate &#x3d; dateAdd&#x28;baseDate,&#x27;d&#x27;, RecordAddedDateInt&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>RecordAddedDate</name>
         <rename>RecordAddedDate</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>RecordAddedTime</name>
-        <rename>RecordAddedTime</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-     <cluster_schema/>
+        <type>Date</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>480</xloc>
-      <yloc>128</yloc>
+      <xloc>512</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

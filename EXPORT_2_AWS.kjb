@@ -19,14 +19,16 @@
     <access>Native</access>
     <database>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</database>
     <port>3306</port>
-    <username>fred</username>
+    <username>root</username>
     <password>Encrypted 2be98afc86aa7f2e4cb0aa360d293adc9</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
       <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.rewriteBatchedStatements</code><attribute>true</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCompression</code><attribute>true</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.userServerPrepStmts</code><attribute>false</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
@@ -72,13 +74,16 @@
     <database>smpetl</database>
     <port>3306</port>
     <username>root</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb0aa360d293adc9</password>
+    <password>Encrypted 2be98afc86aa7f2acfa1ea673ccc2a9ce</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
       <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.rewriteBatchedStatements</code><attribute>true</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCompression</code><attribute>true</attribute></attribute>
       <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useServerPrepStmts</code><attribute>false</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
@@ -106,6 +111,32 @@
     <attributes>
       <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>com.pervasive.jdbc.v2.Driver</attribute></attribute>
       <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;pervasive&#x3a;&#x2f;&#x2f;192.168.0.70&#x3a;1583&#x2f;SUNRISE650</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>PVSQL_h</name>
+    <server/>
+    <type>GENERIC</type>
+    <access>Native</access>
+    <database/>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>com.pervasive.jdbc.v2.Driver</attribute></attribute>
+      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;pervasive&#x3a;&#x2f;&#x2f;192.168.0.64&#x3a;1583&#x2f;HORIZON</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
@@ -174,7 +205,7 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>echo &#x22;home &#x22; &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#xa;echo &#x22;DB&#x22; &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;&#xa;&#xa;if &#x5b; &#x21; -d &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump &#x5d;&#x3b; then&#xa;	echo &#x22;Make file&#x22;&#xa;	mkdir &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#xa;fi&#xa;&#xa;&#x23; This exports all of the data from these tables regardless of date&#xa;mysqldump --login-path&#x3d;local &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d; encountr encordr patient doctors profile procedur facility rescodes insuranc &#x7c; gzip &#x3e; &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;alldates.dump.gz&#xa;if &#x5b; &#x21; -f &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;alldates.dump.gz &#x5d;&#x3b; then&#xa;	echo &#x22;File alldates does not exist after dump&#x22;&#xa;	exit 1&#xa;else &#xa;	echo &#x22;Created &#x22; &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;alldates.dump.gz &#x22; on local server&#x22;&#xa;fi&#xa;&#xa;&#x23; This exports the orders table, taking only the last years data &#xa;mysqldump --login-path&#x3d;local &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d; orders --where&#x3d;&#x22;updatedate&#x3e;&#x3d;DATE_SUB&#x28;NOW&#x28;&#x29;,INTERVAL 1 YEAR&#x29;&#x22; &#x7c; gzip &#x3e; &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;datelimit.dump.gz&#xa;if &#x5b; &#x21; -f &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;alldates.dump.gz &#x5d;&#x3b; then&#xa;	echo &#x22;File datelimits does not exist after dump&#x22;&#xa;	exit 1&#xa;else &#xa;	echo &#x22;Created &#x22; &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;alldates.dump.gz &#x22; on local server&#x22;&#xa;fi&#xa;&#xa;touch &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;dump_complete_&#x24;&#x28;date &#x2b;&#x22;&#x25;m_&#x25;d_&#x25;Y_&#x25;H_&#x25;M_&#x25;S&#x22;&#x29;.txt &#xa;</script>
+      <script>echo &#x22;home &#x22; &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#xd;&#xa;echo &#x22;DB&#x22; &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;&#xd;&#xa;&#xd;&#xa;if &#x5b; &#x21; -d &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump &#x5d;&#x3b; then&#xd;&#xa;	echo &#x22;Make file&#x22;&#xd;&#xa;	mkdir &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#xd;&#xa;fi&#xd;&#xa;&#xd;&#xa;&#x23; This exports all of the data from these tables regardless of date&#xd;&#xa;mysqldump --login-path&#x3d;local &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d; encountr encordr patient doctors profile procedur facility rescodes insuranc RptReviewAudit &#x7c; gzip &#x3e; &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;alldates.dump.gz&#xd;&#xa;if &#x5b; &#x21; -f &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;alldates.dump.gz &#x5d;&#x3b; then&#xd;&#xa;	echo &#x22;File alldates does not exist after dump&#x22;&#xd;&#xa;	exit 1&#xd;&#xa;else &#xd;&#xa;	echo &#x22;Created &#x22; &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;alldates.dump.gz &#x22; on local server&#x22;&#xd;&#xa;fi&#xd;&#xa;&#xd;&#xa;&#x23; This exports the orders table, taking only the last years data &#xd;&#xa;mysqldump --login-path&#x3d;local &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d; orders --where&#x3d;&#x22;updatedate&#x3e;&#x3d;DATE_SUB&#x28;NOW&#x28;&#x29;,INTERVAL 1 YEAR&#x29;&#x22; &#x7c; gzip &#x3e; &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;datelimit.dump.gz&#xd;&#xa;if &#x5b; &#x21; -f &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;alldates.dump.gz &#x5d;&#x3b; then&#xd;&#xa;	echo &#x22;File datelimits does not exist after dump&#x22;&#xd;&#xa;	exit 1&#xd;&#xa;else &#xd;&#xa;	echo &#x22;Created &#x22; &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;alldates.dump.gz &#x22; on local server&#x22;&#xd;&#xa;fi&#xd;&#xa;&#xd;&#xa;touch &#x24;&#x7b;SMP_ETL_HOME&#x7d;&#x2f;dump&#x2f;dump_complete_&#x24;&#x28;date &#x2b;&#x22;&#x25;m_&#x25;d_&#x25;Y_&#x25;H_&#x25;M_&#x25;S&#x22;&#x29;.txt &#xd;&#xa;</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>

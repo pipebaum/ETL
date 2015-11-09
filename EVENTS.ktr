@@ -112,7 +112,7 @@
     <database>smpetl</database>
     <port>3306</port>
     <username>root</username>
-    <password>Encrypted 2be98afc86aa7f2acfa1ea673ccc2a9ce</password>
+    <password>Encrypted 2be98afc86aa7f2e4cb0aa360d293adc9</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -188,15 +188,34 @@
   </connection>
   <order>
   <hop> <from>getDate</from><to>getNewData</to><enabled>Y</enabled> </hop>
-  <hop> <from>getNewData</from><to>fPLDLP</to><enabled>Y</enabled> </hop>
-  <hop> <from>delEncordr-loc</from><to>delOrder-loc</to><enabled>N</enabled> </hop>
-  <hop> <from>fPLDLP</from><to>writePLDLP</to><enabled>Y</enabled> </hop>
-  <hop> <from>writePLDLP</from><to>delEncordr-loc</to><enabled>N</enabled> </hop>
+  <hop> <from>delEncordrLoc</from><to>delOrderLoc</to><enabled>Y</enabled> </hop>
   <hop> <from>fPLDLP</from><to>CompToLast</to><enabled>Y</enabled> </hop>
+  <hop> <from>fPLDLP</from><to>delEncordrLoc</to><enabled>Y</enabled> </hop>
+  <hop> <from>CompToLast</from><to>Switch</to><enabled>Y</enabled> </hop>
+  <hop> <from>Switch</from><to>ignore</to><enabled>Y</enabled> </hop>
+  <hop> <from>Switch</from><to>delOrderLOC 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Res_num_range</from><to>updOrderAWS</to><enabled>Y</enabled> </hop>
+  <hop> <from>Res_num_range</from><to>updOrderLoc</to><enabled>Y</enabled> </hop>
+  <hop> <from>getOrder</from><to>Res_num_range</to><enabled>Y</enabled> </hop>
+  <hop> <from>getEncounter</from><to>int2date</to><enabled>Y</enabled> </hop>
+  <hop> <from>int2date</from><to>updEncordrAWS</to><enabled>Y</enabled> </hop>
+  <hop> <from>int2date</from><to>updEncordrLoc</to><enabled>Y</enabled> </hop>
+  <hop> <from>onlyEncounter</from><to>getOrder</to><enabled>Y</enabled> </hop>
+  <hop> <from>onlyEncounter</from><to>getEncounter</to><enabled>Y</enabled> </hop>
+  <hop> <from>delEncordrAWS</from><to>delOrderAWS</to><enabled>Y</enabled> </hop>
+  <hop> <from>delOrderLoc</from><to>delEncordrAWS</to><enabled>Y</enabled> </hop>
+  <hop> <from>dates</from><to>updELog</to><enabled>Y</enabled> </hop>
+  <hop> <from>getNewData</from><to>lastRow</to><enabled>Y</enabled> </hop>
+  <hop> <from>getNewData</from><to>fPLDLP</to><enabled>Y</enabled> </hop>
+  <hop> <from>lastRow</from><to>filterLast</to><enabled>Y</enabled> </hop>
+  <hop> <from>filterLast</from><to>dates</to><enabled>Y</enabled> </hop>
+  <hop> <from>Switch</from><to>Write to log</to><enabled>Y</enabled> </hop>
+  <hop> <from>Write to log</from><to>onlyEncounter</to><enabled>Y</enabled> </hop>
+  <hop> <from>delOrderLOC 2</from><to>delOrderAWS2</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>writePLDLP</name>
-    <type>WriteToLog</type>
+    <name>CompToLast</name>
+    <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -205,29 +224,129 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-      <limitRows>N</limitRows>
-      <limitRowsNumber>0</limitRowsNumber>
-      <logmessage>PLDLP&#x3a; </logmessage>
-    <fields>
-      <field>
-        <name>EncounterNum</name>
-        </field>
-      <field>
-        <name>EventCode</name>
-        </field>
-      </fields>
-     <cluster_schema/>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>1</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var ignore &#x3d; true&#x3b;&#xd;&#xa;var pid &#x3d; -1&#x3b;&#xd;&#xa;var eNum &#x3d; -1&#x3b;&#xd;&#xa;var eCode &#x3d; &#x27;&#x27;&#x3b;&#xd;&#xa;var eDate &#x3d; -1&#x3b;&#xd;&#xa;var eTime &#x3d; -1&#x3b;&#xd;&#xa;var tCode &#x3d; &#x27;&#x27;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;</jsScript_script>
+      </jsScript>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Item_0</jsScript_name>
+        <jsScript_script>var type &#x3d; &#x22;ignore&#x22;&#x3b;&#xd;&#xa;&#xd;&#xa;if &#x28;trim&#x28;EventCode&#x29; &#x3d;&#x3d; &#x22;PLDLO&#x22;&#x29; &#x7b;&#xd;&#xa;	if &#x28;PatientID &#x21;&#x3d; pid &#x26;&#x26; EncounterNum &#x21;&#x3d; eNum &#x26;&#x26; TestCode &#x21;&#x3d; tCode &#x26;&#x26; &#x28;EventTime - eTime&#x29; &#x3e; 100 &#x29; &#x7b;&#xd;&#xa;		&#x2f;&#x2f; this is a different record then previous so delete order&#xd;&#xa;		type &#x3d; &#x27;del_order&#x27;&#x3b;&#xd;&#xa;	&#x7d; else &#x7b;&#xd;&#xa;		&#x2f;&#x2f; this row is the same as one before, should be an update&#xd;&#xa;		if &#x28;trim&#x28;eCode&#x29; &#x3d;&#x3d; &#x27;PLCHR&#x27;&#x29; &#x7b;&#xd;&#xa;			type &#x3d; &#x27;update&#x27;&#x3b;&#xd;&#xa;		&#x7d;&#xd;&#xa;	&#x7d;&#xd;&#xa;&#x7d; &#xd;&#xa;&#xa;&#x2f;&#x2f; reset the globals for next row&#xd;&#xa;pid &#x3d; PatientID&#x3b;&#xd;&#xa;eNum &#x3d; EncounterNum&#x3b;&#xd;&#xa;eCode &#x3d; EventCode&#x3b;&#xd;&#xa;eDate &#x3d; EventDate&#x3b;&#xd;&#xa;eTime &#x3d; EventTime&#x3b;&#xd;&#xa;tCode &#x3d; TestCode&#x3b;&#xd;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>type</name>
+        <rename>type</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>384</xloc>
-      <yloc>160</yloc>
+      <xloc>320</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>delEncordr-loc</name>
+    <name>Res_num_range</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#x2f;&#x2f;Need to create a range around Res_num since it is a float&#xa;var rn1 &#x3d; RES_NUM - .01&#x3b;&#xa;var rn2 &#x3d; RES_NUM &#x2b; .01&#x3b;&#xa;&#xa;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>rn1</name>
+        <rename>rn1</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>rn2</name>
+        <rename>rn2</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>608</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Switch</name>
+    <type>SwitchCase</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<fieldname>type</fieldname>
+<use_contains>N</use_contains>
+<case_value_type>String</case_value_type>
+<case_value_format/>
+<case_value_decimal/>
+<case_value_group/>
+<default_target_step/>
+<cases><case><value>ignore</value>
+<target_step>ignore</target_step>
+</case><case><value>del_order</value>
+<target_step>delOrderLOC 2</target_step>
+</case><case><value>update</value>
+<target_step>Write to log</target_step>
+</case></cases>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>320</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>delEncordrAWS</name>
+    <type>Delete</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>aws_mysql</connection>
+    <commit>100</commit>
+    <lookup>
+      <schema/>
+      <table>encordr</table>
+      <key>
+        <name>EncounterNum</name>
+        <field>ENCOUNTER</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>640</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>delEncordrLoc</name>
     <type>Delete</type>
     <description/>
     <distribute>Y</distribute>
@@ -251,14 +370,14 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>480</xloc>
-      <yloc>160</yloc>
+      <xloc>416</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>delOrder-loc</name>
+    <name>delOrderLOC 2</name>
     <type>Delete</type>
     <description/>
     <distribute>Y</distribute>
@@ -282,8 +401,70 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>576</xloc>
-      <yloc>160</yloc>
+      <xloc>192</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>delOrderAWS</name>
+    <type>Delete</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>aws_mysql</connection>
+    <commit>100</commit>
+    <lookup>
+      <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
+      <table>orders</table>
+      <key>
+        <name>EncounterNum</name>
+        <field>ENCOUNTER</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>768</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>delOrderLoc</name>
+    <type>Delete</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>mysql-local</connection>
+    <commit>100</commit>
+    <lookup>
+      <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
+      <table>orders</table>
+      <key>
+        <name>EncounterNum</name>
+        <field>ENCOUNTER</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>512</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -299,7 +480,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>writePLDLP</send_true_to>
+<send_true_to>delEncordrLoc</send_true_to>
 <send_false_to>CompToLast</send_false_to>
     <compare>
 <condition>
@@ -311,8 +492,37 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>288</xloc>
-      <yloc>160</yloc>
+      <xloc>320</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>filterLast</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to/>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>result</leftvalue>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>Boolean</type><text>Y</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>160</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -337,8 +547,34 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>96</xloc>
-      <yloc>160</yloc>
+      <xloc>32</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>getEncounter</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>PVSQL</connection>
+    <sql>select&#xd;&#xa;	PROCEDR&#xd;&#xa;,	ENCOUNTER&#xd;&#xa;,	STATUS&#xd;&#xa;,	STAT&#xd;&#xa;,	CREATED_BY&#xd;&#xa;,	SPECIMEN&#xd;&#xa;,	UPDATEDATE updateint&#xd;&#xa;,	UPDATETIME&#xd;&#xa;from &#xd;&#xa;	ENCORDR &#xa;where ENCOUNTER &#x3d; &#x3f;&#xa;&#x3b;</sql>
+    <limit>0</limit>
+    <lookup>onlyEncounter</lookup>
+    <execute_each_row>Y</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>512</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -354,8 +590,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>PVSQL_h</connection>
-    <sql>SELECT&#xa;  PatientID&#xd;&#xa;, EncounterNum&#xd;&#xa;, EventCode&#xd;&#xa;, EventDate&#xd;&#xa;, EventTime&#xd;&#xa;, TestCode&#xa;FROM EVENTLOG with &#x28;index&#x28;K_PostedToPMEvent&#x29;&#x29;&#xa;WHERE EventCode IN &#x28;&#x27;PDLP&#x27;, &#x27;PLDLO&#x27;, &#x27;PLCHR&#x27;&#x29;&#xa;AND &#x28;&#xa;	EventDate &#x3e; &#x3f;&#xa;	or &#xa;	&#x28;EventDate &#x3d; &#x3f; And EventTime &#x3e; &#x3f;&#x29;&#xa;&#x29;&#xa;order by EventDate, PatientID, EncounterNum, EventTime, TestCode</sql>
+    <connection>PVSQL</connection>
+    <sql>SELECT&#xa;  EncounterNum&#xd;&#xa;, PatientID&#xd;&#xa;, EventCode&#xd;&#xa;, EventDate&#xd;&#xa;, EventTime&#xd;&#xa;, TestCode&#xa;FROM EVENTLOG with &#x28;index&#x28;K_PostedToPMEvent&#x29;&#x29;&#xa;WHERE EventCode IN &#x28;&#x27;PLDLP&#x27;, &#x27;PLDLO&#x27;, &#x27;PLCHR&#x27;&#x29;&#xa;AND &#x28;&#xa;	EventDate &#x3e; &#x3f;&#xa;	or &#xa;	&#x28;EventDate &#x3d; &#x3f; And EventTime &#x3e; &#x3f;&#x29;&#xa;&#x29;&#xa;order by EventDate, PatientID, EncounterNum, EventTime, TestCode</sql>
     <limit>0</limit>
     <lookup>getDate</lookup>
     <execute_each_row>N</execute_each_row>
@@ -364,16 +600,61 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>192</xloc>
-      <yloc>160</yloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>CompToLast</name>
-    <type>ScriptValueMod</type>
+    <name>getOrder</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>PVSQL</connection>
+    <sql>select &#xd;&#xa;	ENCOUNTER&#xa;,	PROCEDR&#xd;&#xa;,	PROFILE&#xd;&#xa;,	STATUS&#xa;,	SheduledLab&#xd;&#xa;,	RESULTTYPE&#xd;&#xa;,	RES_ALPHA&#xd;&#xa;,	RES_NUM&#xd;&#xa;,	TEST_DATE&#xd;&#xa;,	POST_TIME&#xd;&#xa;,	TEST_STATUS&#xd;&#xa;,	STAT&#xd;&#xa;,	REPORTABLE&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;,	NOTES&#xa;FROM &#xd;&#xa;	&#x22;ORDER&#x22;&#xa;where ENCOUNTER &#x3d; &#x3f;&#xa;&#x3b;</sql>
+    <limit>0</limit>
+    <lookup>onlyEncounter</lookup>
+    <execute_each_row>Y</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>512</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>ignore</name>
+    <type>Dummy</type>
     <description/>
     <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>320</xloc>
+      <yloc>448</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>int2date</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -383,57 +664,691 @@
     <compatible>N</compatible>
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>1</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var ignore &#x3d; true&#x3b;&#xd;&#xa;var pid &#x3d; -1&#x3b;&#xd;&#xa;var eNum &#x3d; -1&#x3b;&#xd;&#xa;var eCode &#x3d; &#x27;&#x27;&#x3b;&#xd;&#xa;var eDate &#x3d; -1&#x3b;&#xd;&#xa;var eTime &#x3d; -1&#x3b;&#xd;&#xa;var tCode &#x3d; &#x27;&#x27;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;</jsScript_script>
+        <jsScript_name>init</jsScript_name>
+        <jsScript_script>var baseDate &#x3d; new Date&#x28;&#x27;12&#x2f;28&#x2f;1800&#x27;&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Item_0</jsScript_name>
-        <jsScript_script>var type &#x3d; &#x22;ignore&#x22;&#x3b;&#xd;&#xa;&#xd;&#xa;var a &#x3d; trim&#x28;EventCode&#x29; &#x3d;&#x3d; &#x22;PLDLO&#x22;&#x3b;&#xd;&#xa;var ec &#x3d; trim&#x28;EventCode&#x29;&#x3b;&#xd;&#xa;var b &#x3d; PatientID &#x21;&#x3d; pid&#x3b;&#xd;&#xa;var c &#x3d; EncounterNum &#x21;&#x3d; eNum&#x3b;&#xd;&#xa;var d &#x3d; TestCode &#x21;&#x3d; tCode&#x3b;&#xd;&#xa;var e &#x3d; &#x28;EventTime - eTime&#x29; &#x3e; 100&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;if &#x28;trim&#x28;EventCode&#x29; &#x3d;&#x3d; &#x22;PLDLO&#x22;&#x29; &#x7b;&#xd;&#xa;	if &#x28;PatientID &#x21;&#x3d; pid &#x26;&#x26; EncounterNum &#x21;&#x3d; eNum &#x26;&#x26; TestCode &#x21;&#x3d; tCode &#x26;&#x26; &#x28;EventTime - eTime&#x29; &#x3e; 100 &#x29; &#x7b;&#xd;&#xa;		&#x2f;&#x2f; this is a different record then previous so delete order&#xd;&#xa;		type &#x3d; &#x27;del_order&#x27;&#x3b;&#xd;&#xa;	&#x7d; else &#x7b;&#xd;&#xa;		&#x2f;&#x2f; this row is the same as one before, should be an update&#xd;&#xa;		if &#x28;trim&#x28;eCode&#x29; &#x3d;&#x3d; &#x27;PLCHR&#x27;&#x29; &#x7b;&#xd;&#xa;			type &#x3d; &#x27;update&#x27;&#x3b;&#xd;&#xa;		&#x7d;&#xd;&#xa;	&#x7d;&#xd;&#xa;&#x7d; &#xd;&#xa;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;&#x2f;&#x2f; reset the globals for next row&#xd;&#xa;pid &#x3d; PatientID&#x3b;&#xd;&#xa;eNum &#x3d; EncounterNum&#x3b;&#xd;&#xa;eCode &#x3d; EventCode&#x3b;&#xd;&#xa;eDate &#x3d; EventDate&#x3b;&#xd;&#xa;eTime &#x3d; EventTime&#x3b;&#xd;&#xa;tCode &#x3d; TestCode&#x3b;&#xd;&#xa;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>type</name>
-        <rename>type</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>a</name>
-        <rename>a</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>ec</name>
-        <rename>ec</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>b</name>
-        <rename>b</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>c</name>
-        <rename>c</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>d</name>
-        <rename>d</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>e</name>
-        <rename>e</rename>
-        <type>Boolean</type>
+        <jsScript_name>OnRow</jsScript_name>
+        <jsScript_script>var updatedate &#x3d; dateAdd&#x28;baseDate,&#x27;d&#x27;, updateint&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>updatedate</name>
+        <rename>updatedate</rename>
+        <type>Date</type>
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>288</xloc>
+      <xloc>608</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>dates</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>1</jsScript_type>
+        <jsScript_name>init</jsScript_name>
+        <jsScript_script>var baseDate &#x3d; new Date&#x28;&#x27;12&#x2f;28&#x2f;1800&#x27;&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
+      </jsScript>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>OnRow</jsScript_name>
+        <jsScript_script>var eventdateAsDate &#x3d; dateAdd&#x28;baseDate,&#x27;d&#x27;, EventDate&#x29;&#x3b;&#xa;var LoadDate &#x3d; new Date&#x28;&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>eventdateAsDate</name>
+        <rename>eventdateAsDate</rename>
+        <type>Date</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>LoadDate</name>
+        <rename>LoadDate</rename>
+        <type>Date</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>96</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>lastRow</name>
+    <type>DetectLastRow</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <resultfieldname>result</resultfieldname>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>256</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>onlyEncounter</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>PatientID</name>
+      </remove>      <remove>        <name>EventCode</name>
+      </remove>      <remove>        <name>EventDate</name>
+      </remove>      <remove>        <name>EventTime</name>
+      </remove>      <remove>        <name>TestCode</name>
+      </remove>      <remove>        <name>type</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>512</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>updELog</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>mysql-local</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>eventlog</table>
+      <key>
+        <name>EventDate</name>
+        <field>EventDate</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>EventTime</name>
+        <field>EventTime</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>EventDate</name>
+        <rename>EventDate</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>EventTime</name>
+        <rename>EventTime</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>eventdateAsDate</name>
+        <rename>eventdateAsDate</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>LoadDate</name>
+        <rename>LoadDate</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>32</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>updEncordrAWS</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>aws_mysql</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
+      <table>encordr</table>
+      <key>
+        <name>PROCEDR</name>
+        <field>PROCEDR</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>ENCOUNTER</name>
+        <field>ENCOUNTER</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>CREATED_BY</name>
+        <field>CREATED_BY</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>PROCEDR</name>
+        <rename>PROCEDR</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ENCOUNTER</name>
+        <rename>ENCOUNTER</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>CREATED_BY</name>
+        <rename>CREATED_BY</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>STATUS</name>
+        <rename>STATUS</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>STAT</name>
+        <rename>STAT</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>Specimen</name>
+        <rename>Specimen</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UpdateDate</name>
+        <rename>UpdateDate</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UpdateTime</name>
+        <rename>UpdateTime</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>736</xloc>
       <yloc>256</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>updEncordrLoc</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>mysql-local</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
+      <table>encordr</table>
+      <key>
+        <name>PROCEDR</name>
+        <field>PROCEDR</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>ENCOUNTER</name>
+        <field>ENCOUNTER</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>CREATED_BY</name>
+        <field>CREATED_BY</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>PROCEDR</name>
+        <rename>PROCEDR</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ENCOUNTER</name>
+        <rename>ENCOUNTER</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>CREATED_BY</name>
+        <rename>CREATED_BY</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>STATUS</name>
+        <rename>STATUS</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>STAT</name>
+        <rename>STAT</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>Specimen</name>
+        <rename>Specimen</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UpdateDate</name>
+        <rename>UpdateDate</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UpdateTime</name>
+        <rename>UpdateTime</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>736</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>updOrderAWS</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>aws_mysql</connection>
+    <commit>1</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
+      <table>orders</table>
+      <key>
+        <name>ENCOUNTER</name>
+        <field>ENCOUNTER</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>PROCEDR</name>
+        <field>PROCEDR</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>PROFILE</name>
+        <field>PROFILE</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>STATUS</name>
+        <field>STATUS</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>SheduledLab</name>
+        <field>SheduledLab</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>rn1</name>
+        <field>RES_NUM</field>
+        <condition>BETWEEN</condition>
+        <name2>rn2</name2>
+      </key>
+      <key>
+        <name>RES_ALPHA</name>
+        <field>RES_ALPHA</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>RES_ALPHA</name>
+        <rename>RES_ALPHA</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>RES_NUM</name>
+        <rename>RES_NUM</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>PROCEDR</name>
+        <rename>PROCEDR</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>NOTES</name>
+        <rename>NOTES</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ENCOUNTER</name>
+        <rename>ENCOUNTER</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>PROFILE</name>
+        <rename>PROFILE</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>STATUS</name>
+        <rename>STATUS</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>RESULTTYPE</name>
+        <rename>RESULTTYPE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UPDATEDATE</name>
+        <rename>UPDATEDATE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UPDATETIME</name>
+        <rename>UPDATETIME</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>TEST_DATE</name>
+        <rename>TEST_DATE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>POST_TIME</name>
+        <rename>POST_TIME</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>TEST_STATUS</name>
+        <rename>TEST_STATUS</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>STAT</name>
+        <rename>STAT</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>Reportable</name>
+        <rename>Reportable</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>SheduledLab</name>
+        <rename>SheduledLab</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>736</xloc>
+      <yloc>480</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>updOrderLoc</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>mysql-local</connection>
+    <commit>100</commit>
+    <update_bypassed>Y</update_bypassed>
+    <lookup>
+      <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
+      <table>orders</table>
+      <key>
+        <name>ENCOUNTER</name>
+        <field>ENCOUNTER</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>PROCEDR</name>
+        <field>PROCEDR</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>PROFILE</name>
+        <field>PROFILE</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>STATUS</name>
+        <field>STATUS</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>SheduledLab</name>
+        <field>SheduledLab</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>rn1</name>
+        <field>RES_NUM</field>
+        <condition>BETWEEN</condition>
+        <name2>rn2</name2>
+      </key>
+      <key>
+        <name>RES_ALPHA</name>
+        <field>RES_ALPHA</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>RES_ALPHA</name>
+        <rename>RES_ALPHA</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>RES_NUM</name>
+        <rename>RES_NUM</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>PROCEDR</name>
+        <rename>PROCEDR</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>NOTES</name>
+        <rename>NOTES</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ENCOUNTER</name>
+        <rename>ENCOUNTER</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>PROFILE</name>
+        <rename>PROFILE</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>STATUS</name>
+        <rename>STATUS</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>RESULTTYPE</name>
+        <rename>RESULTTYPE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UPDATEDATE</name>
+        <rename>UPDATEDATE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>UPDATETIME</name>
+        <rename>UPDATETIME</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>TEST_DATE</name>
+        <rename>TEST_DATE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>POST_TIME</name>
+        <rename>POST_TIME</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>TEST_STATUS</name>
+        <rename>TEST_STATUS</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>STAT</name>
+        <rename>STAT</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>Reportable</name>
+        <rename>Reportable</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>SheduledLab</name>
+        <rename>SheduledLab</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>736</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <limitRows>N</limitRows>
+      <limitRowsNumber>0</limitRowsNumber>
+      <logmessage/>
+    <fields>
+      <field>
+        <name>EncounterNum</name>
+        </field>
+      <field>
+        <name>type</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>416</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>delOrderAWS2</name>
+    <type>Delete</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>aws_mysql</connection>
+    <commit>100</commit>
+    <lookup>
+      <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
+      <table>orders</table>
+      <key>
+        <name>EncounterNum</name>
+        <field>ENCOUNTER</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>64</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

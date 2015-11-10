@@ -112,7 +112,7 @@
     <database>smpetl</database>
     <port>3306</port>
     <username>root</username>
-    <password>Encrypted 2be98afc86aa7f2acfa1ea673ccc2a9ce</password>
+    <password>Encrypted 2be98afc86aa7f2e4cb0aa360d293adc9</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -204,7 +204,7 @@
     <single_statement>N</single_statement>
     <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
-    <sql>SET FOREIGN_KEY_CHECKS&#x3d;0&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.orders&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.patient&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.doctors&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.encordr&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.encountr&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.facility&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.insuranc&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.procedur&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.profile&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.rescodes&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.RptReviewAudit&#x3b;&#xd;&#xa;SET FOREIGN_KEY_CHECKS&#x3d;1&#x3b;</sql>
+    <sql>SET FOREIGN_KEY_CHECKS&#x3d;0&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.orders&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.patient&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.doctors&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.encordr&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.encountr&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.facility&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.insuranc&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.procedur&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.profile&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.rescodes&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.RptReviewAudit&#x3b;&#xa;drop table if exists &#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;.eventlog&#x3b;&#xd;&#xa;SET FOREIGN_KEY_CHECKS&#x3d;1&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>

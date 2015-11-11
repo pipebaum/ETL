@@ -367,7 +367,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>PVSQL_h</connection>
+    <connection>PVSQL</connection>
     <sql>SELECT top 1&#xa;EventDate&#xa;, EventTime&#xa;&#xa;from &#x22;EVENTLOG&#x22; with &#x28;index&#x28;K_PostedToPMEvent&#x29;&#x29;&#xa;where EventCode IN &#x28;&#x27;PLDLP&#x27;,&#x27;PLCHR&#x27;,&#x27;PLDLO&#x27;&#x29;&#xa;-- group by eventdate, eventtime&#xa;-- and EventDate &#x3d; 78456&#xa;order by 1 desc, 2 desc</sql>
     <limit>0</limit>
     <lookup/>

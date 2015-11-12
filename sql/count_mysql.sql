@@ -18,5 +18,9 @@ union
 SELECT 'PROFILE', count(*)from profile
 union
 SELECT 'RESCODES', count(*)from rescodes
+union
+SELECT 'RptReviewAudit', count(*)from RptReviewAudit
+union
+SELECT 'eventlog', count(*) from eventlog
 ORDER BY 2 desc
 

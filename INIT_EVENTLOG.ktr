@@ -433,9 +433,15 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>OnRow</jsScript_name>
-        <jsScript_script>var now &#x3d; Date.now&#x28;&#x29;&#x3b;&#xd;&#xa;var baseDate &#x3d; new Date&#x28;&#x27;12&#x2f;28&#x2f;1800&#x27;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;var clarionDate &#x3d; now - baseDate&#x3b; &#xd;&#xa;EventDate &#x3d; floor&#x28;clarionDate &#x2f; 1000 &#x2f; 3600&#x2f; 24&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;var d &#x3d; new Date&#x28;&#x29;&#x3b;&#xd;&#xa;var h &#x3d; d.getHours&#x28;&#x29; &#x2a; 3600 &#x3b;&#xd;&#xa;var m &#x3d; d.getMinutes&#x28;&#x29; &#x2a; 60&#x3b;&#xd;&#xa;var s &#x3d; d.getSeconds&#x28;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;var EventTime &#x3d; &#x28;h &#x2b; m &#x2b; s&#x29; &#x2a; 100&#x3b;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>clarionDate</name>
-        <rename>clarionDate</rename>
+        <jsScript_script>var now &#x3d; Date.now&#x28;&#x29;&#x3b;&#xd;&#xa;var baseDate &#x3d; new Date&#x28;&#x27;12&#x2f;28&#x2f;1800&#x27;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;var EventDate &#x3d; now - baseDate&#x3b; &#xd;&#xa;EventDate &#x3d; floor&#x28;EventDate &#x2f; 1000 &#x2f; 3600&#x2f; 24&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;var d &#x3d; new Date&#x28;&#x29;&#x3b;&#xd;&#xa;var h &#x3d; d.getHours&#x28;&#x29; &#x2a; 3600 &#x3b;&#xd;&#xa;var m &#x3d; d.getMinutes&#x28;&#x29; &#x2a; 60&#x3b;&#xd;&#xa;var s &#x3d; d.getSeconds&#x28;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;var EventTime &#x3d; &#x28;h &#x2b; m &#x2b; s&#x29; &#x2a; 100&#x3b;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>EventDate</name>
+        <rename>EventDate</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>EventTime</name>
+        <rename>EventTime</rename>
         <type>Number</type>
         <length>16</length>
         <precision>2</precision>

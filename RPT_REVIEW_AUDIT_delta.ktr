@@ -243,6 +243,11 @@
         <rename>RecordAddedTime</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>ComboDate</name>
+        <rename>comboDate</rename>
+        <update>Y</update>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -361,9 +366,15 @@
         <jsScript_script>var baseDate &#x3d; new Date&#x28;&#x27;12&#x2f;28&#x2f;1800&#x27;&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>OnRow</jsScript_name>
-        <jsScript_script>var RecordAddedDate &#x3d; dateAdd&#x28;baseDate,&#x27;d&#x27;, RecordAddedDateInt&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
+        <jsScript_script>var RecordAddedDate &#x3d; dateAdd&#x28;baseDate,&#x27;d&#x27;, RecordAddedDateInt&#x29;&#x3b;&#xa;var comboDate &#x3d; dateAdd&#x28;RecordAddedDate, &#x27;ss&#x27;, RecordAddedTime &#x2f; 100&#x29;&#x3b;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>RecordAddedDate</name>
         <rename>RecordAddedDate</rename>
+        <type>Date</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>comboDate</name>
+        <rename>comboDate</rename>
         <type>Date</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -424,6 +435,11 @@
       <value>
         <name>RecordAddedTime</name>
         <rename>RecordAddedTime</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ComboDate</name>
+        <rename>comboDate</rename>
         <update>Y</update>
       </value>
     </lookup>

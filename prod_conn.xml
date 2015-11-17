@@ -38,7 +38,7 @@
     <database>smpetl</database>
     <port>3306</port>
     <username>root</username>
-    <password>Encrypted 2be98afc86aa7f2acfa1ea673ccc2a9ce</password>
+    <password>Encrypted 2be98afc86aa7f2e4cb0aa360d293adc9</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>

@@ -112,7 +112,7 @@
     <database>smpetl</database>
     <port>3306</port>
     <username>root</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb0aa360d293adc9</password>
+    <password>Encrypted 2be98afc86aa7f2acfa1ea673ccc2a9ce</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -189,7 +189,6 @@
   <order>
   <hop> <from>getDate</from><to>getNewData</to><enabled>Y</enabled> </hop>
   <hop> <from>delEncordrLoc</from><to>delOrderLoc</to><enabled>Y</enabled> </hop>
-  <hop> <from>fPLDLP</from><to>CompToLast</to><enabled>Y</enabled> </hop>
   <hop> <from>fPLDLP</from><to>delEncordrLoc</to><enabled>Y</enabled> </hop>
   <hop> <from>CompToLast</from><to>Switch</to><enabled>Y</enabled> </hop>
   <hop> <from>Switch</from><to>ignore</to><enabled>Y</enabled> </hop>
@@ -211,12 +210,18 @@
   <hop> <from>filterLast</from><to>dates</to><enabled>Y</enabled> </hop>
   <hop> <from>delOrderLOC 2</from><to>delOrderAWS2</to><enabled>Y</enabled> </hop>
   <hop> <from>Switch</from><to>onlyEncounter</to><enabled>Y</enabled> </hop>
+  <hop> <from>fPLDLP</from><to>fPLEUP</to><enabled>Y</enabled> </hop>
+  <hop> <from>fPLEUP</from><to>CompToLast</to><enabled>Y</enabled> </hop>
+  <hop> <from>localUpdate</from><to>awsUpdate</to><enabled>Y</enabled> </hop>
+  <hop> <from>getNewData 2</from><to>localUpdate</to><enabled>Y</enabled> </hop>
+  <hop> <from>fPLEUP</from><to>remFld</to><enabled>Y</enabled> </hop>
+  <hop> <from>remFld</from><to>getNewData 2</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>CompToLast</name>
     <type>ScriptValueMod</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -239,8 +244,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>320</xloc>
-      <yloc>192</yloc>
+      <xloc>352</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -276,7 +281,7 @@
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>608</xloc>
-      <yloc>416</yloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -307,8 +312,8 @@
 <target_step>onlyEncounter</target_step>
 </case></cases>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>320</xloc>
-      <yloc>320</yloc>
+      <xloc>352</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -377,7 +382,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>640</xloc>
+      <xloc>672</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>
@@ -408,7 +413,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>416</xloc>
+      <xloc>448</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>
@@ -471,7 +476,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>64</xloc>
-      <yloc>320</yloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -502,7 +507,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>192</xloc>
-      <yloc>320</yloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -532,7 +537,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>512</xloc>
+      <xloc>544</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>
@@ -550,7 +555,7 @@
            <schema_name/>
            </partitioning>
 <send_true_to>delEncordrLoc</send_true_to>
-<send_false_to>CompToLast</send_false_to>
+<send_false_to>fPLEUP</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
@@ -561,7 +566,7 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>320</xloc>
+      <xloc>352</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>
@@ -643,7 +648,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>512</xloc>
-      <yloc>224</yloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -660,7 +665,7 @@
            <schema_name/>
            </partitioning>
     <connection>PVSQL</connection>
-    <sql>SELECT&#xa;  EncounterNum&#xd;&#xa;, PatientID&#xd;&#xa;, EventCode&#xd;&#xa;, EventDate&#xd;&#xa;, EventTime&#xd;&#xa;, TestCode&#xa;FROM EVENTLOG with &#x28;index&#x28;K_PostedToPMEvent&#x29;&#x29;&#xa;WHERE EventCode IN &#x28;&#x27;PLDLP&#x27;, &#x27;PLDLO&#x27;, &#x27;PLCHR&#x27;&#x29;&#xa;AND &#x28;&#xa;	EventDate &#x3e; &#x3f;&#xa;	or &#xa;	&#x28;EventDate &#x3d; &#x3f; And EventTime &#x3e; &#x3f;&#x29;&#xa;&#x29;&#xa;order by EventDate, PatientID, EncounterNum, EventTime, TestCode</sql>
+    <sql>SELECT&#xa;  EncounterNum&#xd;&#xa;, PatientID&#xd;&#xa;, EventCode&#xd;&#xa;, EventDate&#xd;&#xa;, EventTime&#xd;&#xa;, TestCode&#xa;FROM EVENTLOG with &#x28;index&#x28;K_PostedToPMEvent&#x29;&#x29;&#xa;WHERE EventCode IN &#x28;&#x27;PLDLP&#x27;, &#x27;PLDLO&#x27;, &#x27;PLCHR&#x27;, &#x27;PLEUP&#x27;&#x29;&#xa;AND &#x28;&#xa;	EventDate &#x3e; &#x3f;&#xa;	or &#xa;	&#x28;EventDate &#x3d; &#x3f; And EventTime &#x3e; &#x3f;&#x29;&#xa;&#x29;&#xa;order by EventDate, PatientID, EncounterNum, EventTime, TestCode</sql>
     <limit>0</limit>
     <lookup>getDate</lookup>
     <execute_each_row>N</execute_each_row>
@@ -695,7 +700,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>512</xloc>
-      <yloc>416</yloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -713,8 +718,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>320</xloc>
-      <yloc>448</yloc>
+      <xloc>352</xloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -747,7 +752,7 @@
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>608</xloc>
-      <yloc>224</yloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -793,7 +798,7 @@
       </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>512</xloc>
-      <yloc>320</yloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -935,7 +940,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>736</xloc>
-      <yloc>256</yloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1019,7 +1024,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>736</xloc>
-      <yloc>160</yloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1167,7 +1172,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>736</xloc>
-      <yloc>480</yloc>
+      <yloc>608</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1315,7 +1320,357 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>736</xloc>
-      <yloc>352</yloc>
+      <yloc>480</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>fPLEUP</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>remFld</send_true_to>
+<send_false_to>CompToLast</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue/>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>PLEUP</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>352</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>awsUpdate</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>aws_mysql</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
+      <table>encountr</table>
+      <key>
+        <name>NUMBER</name>
+        <field>NUMBER</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>NUMBER</name>
+        <rename>NUMBER</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>PATIENT</name>
+        <rename>PATIENT</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>DATE</name>
+        <rename>DATE</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>TIME</name>
+        <rename>TIME</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>EncounterScheduleDat</name>
+        <rename>EncounterScheduleDat</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>EncounterScheduleTim</name>
+        <rename>EncounterScheduleTim</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>STATUS</name>
+        <rename>STATUS</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>INSURANCE</name>
+        <rename>INSURANCE</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>DOCTOR</name>
+        <rename>DOCTOR</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>DIAG</name>
+        <rename>DIAG</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>DIAG2</name>
+        <rename>DIAG2</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>DIAG3</name>
+        <rename>DIAG3</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>DIAG4</name>
+        <rename>DIAG4</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>REQUESTED_DT</name>
+        <rename>REQUESTED_DT</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>REQUESTED_TI</name>
+        <rename>REQUESTED_TI</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>OrderingFacility</name>
+        <rename>OrderingFacility</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>CreateDate</name>
+        <rename>CreateDate</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>CreateTime</name>
+        <rename>CreateTime</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>CreatedBy</name>
+        <rename>CreatedBy</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>UpdateDate</name>
+        <rename>UpdateDate</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>UpdateTime</name>
+        <rename>UpdateTime</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>768</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>localUpdate</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>mysql-local</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>&#x24;&#x7b;SMP_ETL_SCHEMA&#x7d;</schema>
+      <table>encountr</table>
+      <key>
+        <name>NUMBER</name>
+        <field>NUMBER</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>NUMBER</name>
+        <rename>NUMBER</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>PATIENT</name>
+        <rename>PATIENT</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>DATE</name>
+        <rename>DATE</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>TIME</name>
+        <rename>TIME</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>EncounterScheduleDat</name>
+        <rename>EncounterScheduleDat</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>EncounterScheduleTim</name>
+        <rename>EncounterScheduleTim</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>STATUS</name>
+        <rename>STATUS</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>INSURANCE</name>
+        <rename>INSURANCE</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>DOCTOR</name>
+        <rename>DOCTOR</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>DIAG</name>
+        <rename>DIAG</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>DIAG2</name>
+        <rename>DIAG2</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>DIAG3</name>
+        <rename>DIAG3</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>DIAG4</name>
+        <rename>DIAG4</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>REQUESTED_DT</name>
+        <rename>REQUESTED_DT</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>REQUESTED_TI</name>
+        <rename>REQUESTED_TI</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>OrderingFacility</name>
+        <rename>OrderingFacility</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>CreateDate</name>
+        <rename>CreateDate</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>CreateTime</name>
+        <rename>CreateTime</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>CreatedBy</name>
+        <rename>CreatedBy</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>UpdateDate</name>
+        <rename>UpdateDate</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>UpdateTime</name>
+        <rename>UpdateTime</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>672</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>getNewData 2</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>PVSQL</connection>
+    <sql>select &#xd;&#xa;	NUMBER&#xd;&#xa;,	PATIENT&#xd;&#xa;,	DATE&#xd;&#xa;,	TIME&#xd;&#xa;,	ENCOUNTERSCHEDULEDAT&#xd;&#xa;,	ENCOUNTERSCHEDULETIM&#xd;&#xa;,	STATUS&#xd;&#xa;,	INSURANCE&#xd;&#xa;,	DOCTOR&#xd;&#xa;,	DIAG&#xd;&#xa;,	DIAG2&#xd;&#xa;,	DIAG3&#xd;&#xa;,	DIAG4&#xd;&#xa;,	REQUESTED_DT&#xd;&#xa;,	REQUESTED_TI&#xd;&#xa;,	ORDERINGFACILITY&#xd;&#xa;,	CREATEDATE&#xd;&#xa;,	CREATETIME&#xd;&#xa;,	CREATEDBY&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;from &#xd;&#xa;	ENCOUNTR &#x3d; &#x3f;&#xa;&#x3b;</sql>
+    <limit>0</limit>
+    <lookup>remFld</lookup>
+    <execute_each_row>Y</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>544</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>remFld</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>EncounterNum</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>448</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

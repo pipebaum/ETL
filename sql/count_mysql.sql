@@ -23,4 +23,6 @@ SELECT 'RptReviewAudit', count(*)from RptReviewAudit
 union
 SELECT 'eventlog', count(*) from eventlog
 ORDER BY 2 desc
+;
+desc eventlog;
 

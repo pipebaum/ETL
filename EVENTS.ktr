@@ -195,11 +195,11 @@
   <hop> <from>Res_num_range</from><to>updOrderAWS</to><enabled>Y</enabled> </hop>
   <hop> <from>Res_num_range</from><to>updOrderLoc</to><enabled>Y</enabled> </hop>
   <hop> <from>getOrder</from><to>Res_num_range</to><enabled>Y</enabled> </hop>
-  <hop> <from>getEncounter</from><to>int2date</to><enabled>Y</enabled> </hop>
+  <hop> <from>getEncordr</from><to>int2date</to><enabled>Y</enabled> </hop>
   <hop> <from>int2date</from><to>updEncordrAWS</to><enabled>Y</enabled> </hop>
   <hop> <from>int2date</from><to>updEncordrLoc</to><enabled>Y</enabled> </hop>
   <hop> <from>onlyEncounter</from><to>getOrder</to><enabled>Y</enabled> </hop>
-  <hop> <from>onlyEncounter</from><to>getEncounter</to><enabled>Y</enabled> </hop>
+  <hop> <from>onlyEncounter</from><to>getEncordr</to><enabled>Y</enabled> </hop>
   <hop> <from>delEncordrAWS</from><to>delOrderAWS</to><enabled>Y</enabled> </hop>
   <hop> <from>delOrderLoc</from><to>delEncordrAWS</to><enabled>Y</enabled> </hop>
   <hop> <from>dates</from><to>updELog</to><enabled>Y</enabled> </hop>
@@ -212,9 +212,9 @@
   <hop> <from>fPLDLP</from><to>fPLEUP</to><enabled>Y</enabled> </hop>
   <hop> <from>fPLEUP</from><to>CompToLast</to><enabled>Y</enabled> </hop>
   <hop> <from>localUpdate</from><to>awsUpdate</to><enabled>Y</enabled> </hop>
-  <hop> <from>getNewData 2</from><to>localUpdate</to><enabled>Y</enabled> </hop>
+  <hop> <from>getEncounter</from><to>localUpdate</to><enabled>Y</enabled> </hop>
   <hop> <from>fPLEUP</from><to>remFld</to><enabled>Y</enabled> </hop>
-  <hop> <from>remFld</from><to>getNewData 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>remFld</from><to>getEncounter</to><enabled>Y</enabled> </hop>
   <hop> <from>fPLDLP</from><to>delEncordrLoc</to><enabled>Y</enabled> </hop>
   </order>
   <step>
@@ -794,7 +794,7 @@
     </step>
 
   <step>
-    <name>getEncounter</name>
+    <name>getEncordr</name>
     <type>TableInput</type>
     <description/>
     <distribute>N</distribute>
@@ -846,7 +846,7 @@
     </step>
 
   <step>
-    <name>getNewData 2</name>
+    <name>getEncounter</name>
     <type>TableInput</type>
     <description/>
     <distribute>N</distribute>
@@ -857,7 +857,7 @@
            <schema_name/>
            </partitioning>
     <connection>PVSQL</connection>
-    <sql>select &#xd;&#xa;	NUMBER&#xd;&#xa;,	PATIENT&#xd;&#xa;,	DATE&#xd;&#xa;,	TIME&#xd;&#xa;,	ENCOUNTERSCHEDULEDAT&#xd;&#xa;,	ENCOUNTERSCHEDULETIM&#xd;&#xa;,	STATUS&#xd;&#xa;,	INSURANCE&#xd;&#xa;,	DOCTOR&#xd;&#xa;,	DIAG&#xd;&#xa;,	DIAG2&#xd;&#xa;,	DIAG3&#xd;&#xa;,	DIAG4&#xd;&#xa;,	REQUESTED_DT&#xd;&#xa;,	REQUESTED_TI&#xd;&#xa;,	ORDERINGFACILITY&#xd;&#xa;,	CREATEDATE&#xd;&#xa;,	CREATETIME&#xd;&#xa;,	CREATEDBY&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;from &#xd;&#xa;	ENCOUNTR &#x3d; &#x3f;&#xa;&#x3b;</sql>
+    <sql>select &#xd;&#xa;	NUMBER&#xd;&#xa;,	PATIENT&#xd;&#xa;,	DATE&#xd;&#xa;,	TIME&#xd;&#xa;,	ENCOUNTERSCHEDULEDAT&#xd;&#xa;,	ENCOUNTERSCHEDULETIM&#xd;&#xa;,	STATUS&#xd;&#xa;,	INSURANCE&#xd;&#xa;,	DOCTOR&#xd;&#xa;,	DIAG&#xd;&#xa;,	DIAG2&#xd;&#xa;,	DIAG3&#xd;&#xa;,	DIAG4&#xd;&#xa;,	REQUESTED_DT&#xd;&#xa;,	REQUESTED_TI&#xd;&#xa;,	ORDERINGFACILITY&#xd;&#xa;,	CREATEDATE&#xd;&#xa;,	CREATETIME&#xd;&#xa;,	CREATEDBY&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;from ENCOUNTER&#xa;WHERE ENCOUNTR &#x3d; &#x3f;&#xa;&#x3b;</sql>
     <limit>0</limit>
     <lookup>remFld</lookup>
     <execute_each_row>Y</execute_each_row>

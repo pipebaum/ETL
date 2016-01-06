@@ -202,7 +202,7 @@
            <schema_name/>
            </partitioning>
     <connection>PVSQL</connection>
-    <sql>select&#xd;&#xa;	ENCOUNTER&#xd;&#xa;,	PROCEDR&#xd;&#xa;,	PROFILE&#xd;&#xa;,	STATUS&#xa;,	SHEDULEDLAB&#xd;&#xa;,	RESULTTYPE&#xd;&#xa;,	RES_ALPHA&#xa;,	RES_NUM&#xd;&#xa;,	TEST_DATE&#xd;&#xa;,	POST_TIME&#xd;&#xa;,	TEST_STATUS&#xd;&#xa;,	STAT&#xd;&#xa;,	REPORTABLE&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;,	NOTES&#xa;FROM &#xd;&#xa;	&#x22;ORDER&#x22;&#xd;&#xa;WHERE&#xa;	UPDATEDATE &#x3e;&#x3d; dateadd&#x28;month, -18, Now&#x28;&#x29;&#x29;&#xa;ORDER BY UPDATEDATE DESC</sql>
+    <sql>select&#xd;&#xa;	ENCOUNTER&#xd;&#xa;,	PROCEDR&#xd;&#xa;,	PROFILE&#xd;&#xa;,	STATUS&#xa;,	SHEDULEDLAB&#xd;&#xa;,	RESULTTYPE&#xd;&#xa;,	RES_ALPHA&#xa;,	RES_NUM&#xd;&#xa;,	TEST_DATE&#xd;&#xa;,	POST_TIME&#xd;&#xa;,	TEST_STATUS&#xd;&#xa;,	STAT&#xd;&#xa;,	REPORTABLE&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;,	NOTES&#xa;FROM &#xd;&#xa;	&#x22;ORDER&#x22;&#xd;&#xa;WHERE&#xa;	UPDATEDATE &#x3e;&#x3d; &#x27;2014-01-01&#x27;&#xa;ORDER BY UPDATEDATE DESC</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

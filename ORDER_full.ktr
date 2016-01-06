@@ -160,6 +160,32 @@
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
+  <connection>
+    <name>PVSQL_h</name>
+    <server/>
+    <type>GENERIC</type>
+    <access>Native</access>
+    <database/>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>com.pervasive.jdbc.v2.Driver</attribute></attribute>
+      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;pervasive&#x3a;&#x2f;&#x2f;192.168.0.64&#x3a;1583&#x2f;HORIZON</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
   <hop> <from>in_ORDER</from><to>orders</to><enabled>Y</enabled> </hop>
   <hop> <from>trunc</from><to>in_ORDER</to><enabled>Y</enabled> </hop>
@@ -176,7 +202,7 @@
            <schema_name/>
            </partitioning>
     <connection>PVSQL</connection>
-    <sql>select&#xd;&#xa;	ENCOUNTER&#xd;&#xa;,	PROCEDR&#xd;&#xa;,	PROFILE&#xd;&#xa;,	STATUS&#xa;,	SHEDULEDLAB&#xd;&#xa;,	RESULTTYPE&#xd;&#xa;,	RES_ALPHA&#xa;,	RES_NUM&#xd;&#xa;,	TEST_DATE&#xd;&#xa;,	POST_TIME&#xd;&#xa;,	TEST_STATUS&#xd;&#xa;,	STAT&#xd;&#xa;,	REPORTABLE&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;,	NOTES&#xa;FROM &#xd;&#xa;	&#x22;ORDER&#x22;&#xd;&#xa;WHERE&#xa;	UPDATEDATE &#x3e;&#x3d; &#x27;2014-01-01&#x27;&#xa;ORDER BY UPDATEDATE DESC</sql>
+    <sql>select&#xd;&#xa;	ENCOUNTER&#xd;&#xa;,	PROCEDR&#xd;&#xa;,	PROFILE&#xd;&#xa;,	STATUS&#xa;,	SHEDULEDLAB&#xd;&#xa;,	RESULTTYPE&#xd;&#xa;,	RES_ALPHA&#xa;,	RES_NUM&#xd;&#xa;,	TEST_DATE&#xd;&#xa;,	POST_TIME&#xd;&#xa;,	TEST_STATUS&#xd;&#xa;,	STAT&#xd;&#xa;,	REPORTABLE&#xd;&#xa;,	UPDATEDATE&#xd;&#xa;,	UPDATETIME&#xd;&#xa;,	NOTES&#xa;FROM &#xd;&#xa;	&#x22;ORDER&#x22;&#xd;&#xa;WHERE&#xa;	UPDATEDATE &#x3e;&#x3d; dateadd&#x28;month, -18, Now&#x28;&#x29;&#x29;&#xa;ORDER BY UPDATEDATE DESC</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
